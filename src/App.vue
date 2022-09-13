@@ -1,11 +1,12 @@
 <template>
   <div id="app">
     <nav>
+      <router-link to="/">Home</router-link> |
       <router-link to="/budget">Minu eelarve</router-link> |
       <router-link to="/report">Raport</router-link> |
       <router-link to="/accounts">Minu kontod</router-link> |
     </nav>
-    <!--<router-view/> -->
+    <router-view/>
   </div>
 </template>
 
