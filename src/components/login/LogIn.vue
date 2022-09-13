@@ -1,28 +1,28 @@
 <template>
- <div>
-   <br>
-   <h2>{{title}}</h2>
-   <!--  Siia tuleb ALERT....<AlertError :errormessage="alertError"/> -->
-   <input type="text" style="margin: 5px" placeholder="kasutajanimi" v-model="loginRequest.username"> <br>
-   <input type="text" style="margin: 5px" placeholder="parool" v-model="loginRequest.password"> <br>
-   <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="logIn">Logi sisse</button>
+  <div>
+    <div v-if="divLogInInputForm">
+      <br>
+      <h2>{{ title }}</h2>
+      <AlertError :errorMessage="alertError"/>
+      <input type="text" style="margin: 5px" placeholder="kasutajanimi" v-model="loginRequest.username"><br>
+      <input type="password" style="margin: 5px" placeholder="parool" v-model="loginRequest.password"><br>
+      <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="logIn">Logi sisse</button>
+      <br>
+      <router-link to="/register">Registreeri uus kasutaja</router-link>
+    </div>
 
-   <router-link to="/register">Registreeri uus kasutaja</router-link>
-   <br>
-
-
-   <div v-if="divChooseRole">
-     <br>
-     <h2>Sisene rolliga</h2>
-     <input checked type="radio" id="optionOne" :value="roles[0]" v-model="roleSelected"/>
-     <label for="optionOne">{{ roles[0] }}</label>
-     <br>
-     <input type="radio" id="optionTwo" :value="roles[1]" v-model="roleSelected"/>
-     <label for="optionTwo">{{ roles[1] }}</label>
-     <br>
-     <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="logInWithRole">Sisene</button>
-   </div>
- </div>
+    <div v-if="divChooseRole">
+      <br>
+      <h2>Sisene rolliga</h2>
+      <input checked type="radio" id="optionOne" :value="roles[0]" v-model="roleSelected"/>
+      <label for="optionOne">{{ roles[0] }}</label>
+      <br>
+      <input type="radio" id="optionTwo" :value="roles[1]" v-model="roleSelected"/>
+      <label for="optionTwo">{{ roles[1] }}</label>
+      <br>
+      <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="logInWithRole">Sisene</button>
+    </div>
+  </div>
 </template>
 
 <script>
