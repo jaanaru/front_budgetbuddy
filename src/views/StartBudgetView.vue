@@ -4,7 +4,7 @@
     Loo oma eelarve
 
     <!-- kuvab standard eelarve listina -->
-    <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="findAllCategories">Alusta
+    <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="findIncomeCategories">Alusta
     </button>
 
     <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="changeMyBudget">Muuda eelarve malli
@@ -21,17 +21,35 @@ export default {
   name: "StartBudgetView",
   data: function(){
     return {
-     <!-- categoryName: '',
-      subcategoryName: '' -->
+     userId: sessionStorage.getItem('userId'),
+      incomeCategories: {
+
+      },
+      expenseCategories: {
+
+      }
+
     }
   },
   methods: {
-    findAllCategories: function () {
-      this.$http.get('/setup/categories/income?userId')
-          .then(result => {
-            console.log(result )
-          } )
-    },
+    findIncomeCategories: function () {
+      this.$http.get("/some/path", {
+            params: {
+              userId: this.userId
+            }
+          }
+      ).then(response => {
+        this.incomeCategories = response.data
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+
+  },
+  mounted() {
+ //   this.findIncomeCategories()
+   // this.findExpenseCategories()
   }
 }
 </script>
