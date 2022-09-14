@@ -1,6 +1,7 @@
 <template>
   <div>
-    <AlertSuccess :successMessage="successMessage"/>
+
+<!--   <AlertError :errorMessage="errorMessage"/>-->
     <input type="text" style="margin: 5px" placeholder="kasutajanimi" v-model="userRequest.userName"><br>
     <input type="text" style="margin: 5px" placeholder="parool" v-model="userRequest.password"><br>
     <input type="text" style="margin: 5px" placeholder="email" v-model="userRequest.email"><br>
@@ -10,11 +11,14 @@
 </template>
 
 <script>
-import AlertSuccess from "@/components/alerts/AlertSuccess";
+import AlertError from "@/components/alerts/AlertError";
 
 export default {
   name: 'RegisterUserView',
-  components: {AlertSuccess},
+  components: {
+     AlertError
+  },
+
   data: function () {
     return {
       successMessage: '',

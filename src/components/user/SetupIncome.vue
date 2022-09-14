@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h2> Vali tulu kategooria </h2>
+    <h2> Tulu kategooria </h2>
     <!-- siia tuleb list -->
 
 
 
-    <h2> Vali kulu kategooria </h2>
+    <h2> Kulu kategooria </h2>
     <!-- siia tuleb list -->
 
 

@@ -11,7 +11,7 @@
       <router-link to="/register">Registreeri uus kasutaja</router-link>
     </div>
 
-    <div v-if="divChooseRole">
+   <!-- <div v-if="divChooseRole">
       <br>
       <h2>Sisene rolliga</h2>
       <input checked type="radio" id="optionOne" :value="roles[0]" v-model="roleSelected"/>
@@ -21,7 +21,7 @@
       <label for="optionTwo">{{ roles[1] }}</label>
       <br>
       <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="logInWithRole">Sisene</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
