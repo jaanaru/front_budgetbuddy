@@ -17,13 +17,29 @@
 
 
 <script>
+import SetupIncome from "@/components/user/SetupIncome";
+import SetupExpense from "@/components/user/SetupExpense";
 export default {
   name: "StartBudgetView",
+  components: {SetupIncome, SetupExpense},
   data: function(){
     return {
      userId: sessionStorage.getItem('userId'),
       incomeCategories: {
-
+        categories: [
+          {
+            categoryId: 0,
+            categoryName: '',
+            subcategories: [
+              {
+                categoryId: 0,
+                subcategoryId: 0,
+                subcategoryName: '',
+                isActive: true
+              }
+            ]
+          }
+        ]
       },
       expenseCategories: {
 
@@ -32,6 +48,7 @@ export default {
     }
   },
   methods: {
+
     findIncomeCategories: function () {
       this.$http.get("/some/path", {
             params: {

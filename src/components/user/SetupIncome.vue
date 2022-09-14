@@ -5,12 +5,6 @@
 
 
 
-    <h2> Kulu kategooria </h2>
-    <!-- siia tuleb list -->
-
-
-
-
 
     <button type="submit">Lisa</button>
     <button type="submit">Muuda</button>
@@ -23,7 +17,7 @@
 <script>
 export default {
   name: "SetupIncome",
-  components: {}
+
   data: function () {
     return {
 

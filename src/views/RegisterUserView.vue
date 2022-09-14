@@ -1,8 +1,8 @@
 <template>
   <div>
 
-<!--   <AlertError :errorMessage="errorMessage"/>-->
-    {{userRequest.userName}}
+   <AlertError :errorMessage="errorMessage"/>
+
     <input type="text" style="margin: 5px" placeholder="kasutajanimi" v-model="userRequest.userName"><br>
     <input type="text" style="margin: 5px" placeholder="parool" v-model="userRequest.password"><br>
     <input type="text" style="margin: 5px" placeholder="email" v-model="userRequest.email"><br>
@@ -17,7 +17,7 @@ import AlertError from "@/components/alerts/AlertError";
 export default {
   name: 'RegisterUserView',
   components: {
-     AlertError
+    AlertError
   },
 
   data: function () {
@@ -35,24 +35,24 @@ export default {
   },
   methods: {
     registerNewUser: function () {
-      // enne kui te üldse register user sõnumit teele panete, siis vaadake et kõik kastid oleks täidetud (vihje .size())
-      // kui ei ole täidetud siis alert errori ära täita, kui errorit pole siis errorMessage = ''
+      this.errorMessage = ''
 
-      this.$http.post("/login/register/user", this.userRequest
-      ).then(response => {
+      if (this.userRequest.userName.length == 0 || this.userRequest.password.length == 0 || this.userRequest.email.length == 0) {
+        this.errorMessage = 'Kõik väljad peavad olema täidetud'
+      } else {
+        this.$http.post("/login/register/user", this.userRequest
+        ).then(response => {
           this.userResponse = response.data
-        // todo: salvestada userId ära session storage'sse (otsi sõna 'session' järgi üle ourBank-front projekti selle kasutust
-        //  (ctrl+shift+F)
-        //  Teil läheb seda userId'd hiljem igal pool vaja. Vaadake hiljem näidiseid et kuidas sessionstorage.getItem() abil saada neid väärtusi kätte
-        // peale seda pushige ('push') uuele lehele startBudgetVuew (vihje, router sätted)
-
-        //
+          sessionStorage.setItem('userId', this.userResponse.userId)
+          this.$router.push({name: 'startBudgetRoute'})
 
 
-      }).catch(error => {
-        // kui tuleb error, siis peaks errorMessage ära täitma
-        console.log(error.response.detail)
-      })
+
+        }).catch(error => {
+          // kui tuleb error, siis peaks errorMessage ära täitma????
+          console.log(error.response.detail)
+        });
+      }
     }
   }
 }
