@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img alt="Vue logo" src="../assets/BudgetbuddyLogo.png" height="100px"
+         width="120px">
     <LogIn title="Sisse logimine"/>
   </div>
 </template>
