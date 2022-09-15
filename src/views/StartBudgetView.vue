@@ -3,7 +3,7 @@
         <br>
         <h2> Loo oma eelarve</h2>
         <br>
-
+        <h2></h2>
 
         <div>
             <ul v-for="category in this.incomeCategories">
@@ -14,7 +14,6 @@
             </ul>
         </div>
 
-
         <!-- kuvab standard eelarve listina -->
         <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="findIncomeCategories">Alusta
         </button>
@@ -23,7 +22,6 @@
         <!--    </button>-->
         <!--    <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="useStandardBudget">Kasuta eelarve malli-->
         <!--    </button>-->
-
 
         <div>
             <SetupIncome title='Tulukategooriad'/>
@@ -49,7 +47,6 @@ export default {
             userId: sessionStorage.getItem('userId'),
 
             incomeCategories: [
-
                 {
                     categoryId: 0,
                     categoryName: "",
