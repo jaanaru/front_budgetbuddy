@@ -8,6 +8,8 @@
     <input type="text" style="margin: 5px" placeholder="email" v-model="userRequest.email"><br>
     <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="registerNewUser">Loo kasutaja</button>
     <br>
+
+
   </div>
 </template>
 
@@ -23,6 +25,7 @@ export default {
   data: function () {
     return {
       errorMessage: '',
+        userExists : true,
       userRequest: {
         userName: '',
         password: '',
@@ -50,6 +53,12 @@ export default {
 
         }).catch(error => {
           // kui tuleb error, siis peaks errorMessage ära täitma????
+            let errorMessage = error.error.response.data.detail
+            errorMessage = errorMessage.replace('[', '')
+            errorMessage = errorMessage.replace(']', '')
+            this.errorMessage = errorMessage
+
+
           console.log(error.response.detail)
         });
       }

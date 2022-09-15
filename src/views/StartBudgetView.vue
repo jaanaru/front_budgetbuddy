@@ -1,35 +1,62 @@
 <template>
     <div>
         <br>
-        <h2> Loo oma eelarve</h2>
+        <h1> Loo oma eelarve</h1>
         <br>
-        <h2></h2>
-
         <div>
-            <ul v-for="category in this.incomeCategories">
-                <li> {{ category.categoryName }}</li>
-                <ul v-for="subcategory in category.subcategories">
-                <li>{{subcategory.subcategoryName}}</li>
-                </ul>
-            </ul>
+            <SetupIncome title='Tulukategooria'/>
         </div>
+        <br><br>
 
-        <!-- kuvab standard eelarve listina -->
-        <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="findIncomeCategories">Alusta
-        </button>
+<!--        <div class="list-group">-->
 
-        <!--    <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="changeMyBudget">Muuda eelarve malli-->
-        <!--    </button>-->
-        <!--    <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="useStandardBudget">Kasuta eelarve malli-->
-        <!--    </button>-->
 
-        <div>
-            <SetupIncome title='Tulukategooriad'/>
-        </div>
-        <div>
-            <SetupExpense title="Kulukategooriad"/>
-        </div>
 
+<!--            <ul class="list-group" v-for="category in this.incomeCategories">-->
+<!--                <li>-->
+<!--                    <button type="button" class="list-group-item list-group-item-action">{{-->
+<!--                            category.categoryName-->
+<!--                        }}-->
+<!--                    </button>-->
+<!--                </li>-->
+<!--                <ul class="list-group" v-for="subcategory in category.subcategories">-->
+<!--                    <li>-->
+<!--                        <button type="button" class="list-group-item list-group-item-action">-->
+<!--                            {{ subcategory.subcategoryName }}-->
+<!--                        </button>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </ul>-->
+<!--        </div>-->
+
+
+
+
+<!--        <div>-->
+<!--            <SetupExpense title="Kulukategooriad"/>-->
+<!--        </div>-->
+<!--        <br><br>-->
+
+<!--        <ul class="list-group" v-for="category in this.expenseCategories">-->
+<!--            <li>-->
+<!--                <button type="button" class="list-group-item list-group-item-action">{{-->
+<!--                        category.categoryName-->
+<!--                    }}-->
+<!--                </button>-->
+<!--            </li>-->
+<!--            <ul class="list-group" v-for="subcategory in category.subcategories">-->
+<!--                <li>-->
+<!--                    <button type="button" class="list-group-item list-group-item-action">{{-->
+<!--                            subcategory.subcategoryName-->
+<!--                        }}-->
+<!--                    </button>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </ul>-->
+
+
+<!--        <button type="button" style="margin: 5px" class="btn btn-outline-dark" v-on:click="findIncomeCategories">OK-->
+<!--        </button>-->
 
     </div>
 </template>
@@ -44,50 +71,48 @@ export default {
     components: {SetupIncome, SetupExpense},
     data() {
         return {
-            userId: sessionStorage.getItem('userId'),
+            // userId: sessionStorage.getItem('userId'),
 
-            incomeCategories: [
-                {
-                    categoryId: 0,
-                    categoryName: "",
-                    subcategories: [
-                        {
-                            categoryId: 0,
-                            subcategoryId: 0,
-                            subcategoryName: "",
-                            isActive: true
-                        }
-                    ]
-                }
-            ],
-            expenseCategories: {}
+            // incomeCategories: [
+            //     {
+            //         categoryId: 0,
+            //         categoryName: "",
+            //         subcategories: [
+            //             {
+            //                 categoryId: 0,
+            //                 subcategoryId: 0,
+            //                 subcategoryName: "",
+            //                 isActive: true
+            //             }
+            //         ]
+            //     }
+            // ],
+            // expenseCategories: [
+            //     {
+            //         categoryId: 0,
+            //         categoryName: "",
+            //         subcategories: [
+            //             {
+            //                 categoryId: 0,
+            //                 subcategoryId: 0,
+            //                 subcategoryName: "",
+            //                 isActive: true
+            //             }
+            //         ]
+            //     }
+            // ],
+
         }
 
     },
 
     methods: {
 
-        findIncomeCategories: function () {
-            this.$http.get("/setup/categories/income", {
-                    params: {
-                        userId: this.userId
-                    }
-                }
-            ).then(response => {
-                this.incomeCategories = response.data.categories
-                console.log("income kategooriad", response.data)
-            }).catch(error => {
-                console.log(error)
-            })
-        }
-
-    }
-    ,
+    },
     mounted() {
-        this.findIncomeCategories()
-        // this.findExpenseCategories()
-    }
-    ,
+        // this.findIncomeCategories()
+        //  this.findExpenseCategories()
+    },
 }
 </script>
 
