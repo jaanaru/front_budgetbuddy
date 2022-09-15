@@ -1,50 +1,28 @@
 <template>
     <div>
         <h2> {{ title }}</h2>
-        <!-- siia tuleb list -->
 
-        <!--      <div>-->
-        <!--          <ul class="list-group" v-for="category in incomeCategories">-->
-        <!--              <li>-->
-        <!--                  <button type="button" class="list-group-item list-group-item-action">{{-->
-        <!--                          category.categoryName-->
-        <!--                      }}-->
-        <!--                  </button>-->
-        <!--              </li>-->
-        <!--              <ul class="list-group" v-for="subcategory in category.subcategories">-->
-        <!--                  <li>-->
-        <!--                      <button type="button" class="list-group-item list-group-item-action">-->
-        <!--                          {{ subcategory.subcategoryName }}-->
-        <!--                      </button>-->
-        <!--                  </li>-->
-        <!--              </ul>-->
-        <!--          </ul>-->
-        <!--      </div>-->
-
-        <br>
-        <br>
-        <br>
         <table>
-            <tr v-for="category in incomeCategories">
+            <tr v-for="category in incomeCategories" id="mainCategory">
                 <td>{{ category.categoryName }}</td>
                 <br> <br> <br> <br>
-                <div v-for="subcategory in category.subcategories">
+
+
+                <div v-for="subcategory in category.subcategories" id="subcategiry">
                     {{ subcategory.subcategoryName }}
-                    <button type="submit" v-on:click="editSubcategoryName(subcategory)">muuda</button>
-                    <button type="submit">kustuta</button>
+                    <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="editSubcategoryName(subcategory)">Muuda</button>
+                    <button type="submit" class="btn btn-outline-dark btn-sm">kustuta</button>
                 </div>
-                <button type="submit">lisa...</button>
+
+                <button type="submit" class="btn btn-outline-dark btn-sm">lisa...</button>
             </tr>
         </table>
         <br><br>
-        <div>
+        <div >
             <input type="text" v-model="newSubcategoryName">
-            <button v-on:click="updateSubcategoryName">Salvesta</button>
+            <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="updateSubcategoryName">Salvesta</button>
         </div>
 
-
-        <!--    <button type="submit">Lisa</button>-->
-        <!--    <button type="submit">Muuda</button>-->
 
 
     </div>
@@ -61,7 +39,7 @@ export default {
     data() {
         return {
             userId: sessionStorage.getItem('userId'),
-            newSubcategoryName: 'Tere',
+            newSubcategoryName: '',
             subcategoryId: 0,
             incomeCategories: [
                 {
@@ -121,5 +99,19 @@ export default {
 </script>
 
 <style scoped>
+#mainCategory {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border: 2px ;
+    padding: 5px;
+}
+#subcategiry {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border: 2px ;
+    padding: 2px;
+}
 
 </style>
