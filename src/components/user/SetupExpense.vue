@@ -7,17 +7,25 @@
           <tr v-for="category in expenseCategories" id="mainCategory">
               <td>{{ category.categoryName }}</td>
               <br> <br> <br> <br>
+
+
               <div v-for="subcategory in category.subcategories" id="subcategiry">
                   {{ subcategory.subcategoryName }}
                   <button type="submit" class="btn btn-outline-dark btn-sm"v-on:click="editSubcategoryName(subcategory)">muuda</button>
                   <button type="submit" class="btn btn-outline-dark btn-sm">kustuta</button>
               </div>
-              <div v-if="divAddSubcategory">
-                  <AddSubcategory/>
+
+              <div>
                   <button type="submit" class="btn btn-outline-dark btn-sm" id="addSubcategory"
                           v-on:click="addNewSubcategory">Lisa uus
                   </button>
+                  <div v-if="displayAddSubcategoryComponent">
+                      <AddSubcategory :category-id="category.categoryId"
+                                      :display-component="displayAddSubcategoryComponent"
+                                      @successfulAddedNewSubcategoryEvent="refreshSubcategories"/>
+                  </div>
               </div>
+
           </tr>
       </table>
       <br><br>
@@ -32,9 +40,14 @@
 
 </template>
 
+import AddSubcategory from "@/components/user/AddSubcategory";
+
 <script>
+import AddSubcategory from "@/components/user/AddSubcategory";
+
 export default {
   name: "SetupExpense",
+    components: {AddSubcategory},
     props: {
       title: String,
     },
@@ -62,6 +75,7 @@ return {
        ],
     divUpdateSubcategoryName: true,
     divAddSubcategory: true,
+    displayAddSubcategoryComponent: false
    }
    },
     methods: {
@@ -100,8 +114,12 @@ return {
         },
 
         addNewSubcategory: function () {
-            this.divAddSubcategory = true
-            this.$router.push({name: 'addSubcategoryRoute'})
+            this.displayAddSubcategoryComponent = true
+
+        },
+        refreshSubcategories: function () {
+            this.findExpenseCategories()
+            this.displayAddSubcategoryComponent = false
         },
     },
     mounted() {
