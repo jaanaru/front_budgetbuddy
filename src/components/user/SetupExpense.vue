@@ -17,7 +17,7 @@
 
               <div>
                   <button type="submit" class="btn btn-outline-dark btn-sm" id="addSubcategory"
-                          v-on:click="addNewSubcategory">Lisa uus
+                          v-on:click="addNewSubcategory">Lisa uus alamkategooria
                   </button>
                   <div v-if="displayAddSubcategoryComponent">
                       <AddSubcategory :category-id="category.categoryId"
@@ -34,13 +34,17 @@
           <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="updateSubcategoryName">Salvesta</button>
       </div>
 
+      <div>
+          <button type="submit">Lisa uus peakategooria
+          </button>
+      </div>
 
   </div>
 
 
 </template>
 
-import AddSubcategory from "@/components/user/AddSubcategory";
+
 
 <script>
 import AddSubcategory from "@/components/user/AddSubcategory";

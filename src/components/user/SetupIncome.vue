@@ -9,8 +9,9 @@
                 <br> <br> <br> <br>
 
 
-                <div v-for="subcategory in category.subcategories" id="subcategiry">
+                <div v-for="subcategory in category.subcategories" id="subcategory">
                     {{ subcategory.subcategoryName }}
+
                     <button type="submit" class="btn btn-outline-dark btn-sm"
                             v-on:click="editSubcategoryName(subcategory)">Muuda
                     </button>
@@ -19,7 +20,7 @@
 
                 <div>
                     <button type="submit" class="btn btn-outline-dark btn-sm" id="addSubcategory"
-                            v-on:click="addNewSubcategory">Lisa uus
+                            v-on:click="addNewSubcategory">Lisa uus alamkategooria
                     </button>
                     <div v-if="displayAddSubcategoryComponent">
                         <AddSubcategory :category-id="category.categoryId"
@@ -27,17 +28,30 @@
                                         @successfulAddedNewSubcategoryEvent="refreshSubcategories"/>
                     </div>
 
-
                 </div>
+
+
             </tr>
         </table>
+
+
         <br><br>
         <div v-if="divUpdateSubcategoryName">
             <input type="text" v-model="newSubcategoryName">
             <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="updateSubcategoryName">Salvesta
             </button>
         </div>
+        <br>
+<div>
+    <button type="submit" class="btn btn-outline-dark btn-lg"v-on:click="addNewCategory">Lisa uus peakategooria
+    </button>
+    <div v-if="displayNewIncomeComponent">
+        <AddIncomeCategory :user-id="this.userId"
+                           :display-component="displayNewIncomeComponent"
+                           @successfulAddedNewCategoryEvent="refreshCategories"/>
 
+    </div>
+</div>
 
     </div>
 
@@ -45,10 +59,11 @@
 
 <script>
 import AddSubcategory from "@/components/user/AddSubcategory";
+import addIncomeCategory from "@/components/user/AddIncomeCategory";
 
 export default {
     name: "SetupIncome",
-    components: {AddSubcategory},
+    components: {AddSubcategory, addIncomeCategory},
     props: {
         title: String,
     },
@@ -74,7 +89,8 @@ export default {
             ],
             divUpdateSubcategoryName: true,
             divAddSubcategory: true,
-            displayAddSubcategoryComponent: false
+            displayAddSubcategoryComponent: false,
+            displayNewIncomeComponent: false
 
         }
 
@@ -121,6 +137,15 @@ export default {
             this.findIncomeCategories()
             this.displayAddSubcategoryComponent = false
         },
+        addNewCategory: function () {
+            this.displayNewIncomeComponent = true
+
+        },
+        refreshCategories: function () {
+            this.findIncomeCategories()
+            this.displayNewIncomeComponent = true
+                                      }
+
     },
 
 

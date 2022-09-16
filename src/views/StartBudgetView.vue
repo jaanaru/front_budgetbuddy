@@ -1,15 +1,15 @@
 <template>
     <div id="startBudget">
-        <br>
-        <h1> Loo oma eelarve</h1>
-        <br>
-        <div>
-            <SetupIncome title='Tulukategooria'/>
-        </div>
+
+        <h1> Loo oma eelarve</h1><br>
+        <div><SetupIncome title='Tulukategooria'/></div>
+
         <br><br>
 
+        <div><SetupExpense title='Kulukategooria'/></div>
+
         <div>
-            <SetupExpense title='Kulukategooria'/>
+
         </div>
         <br><br>
     </div>
