@@ -12,7 +12,12 @@
                   <button type="submit" class="btn btn-outline-dark btn-sm"v-on:click="editSubcategoryName(subcategory)">muuda</button>
                   <button type="submit" class="btn btn-outline-dark btn-sm">kustuta</button>
               </div>
-              <button type="submit" class="btn btn-outline-dark btn-sm">lisa...</button>
+              <div v-if="divAddSubcategory">
+                  <AddSubcategory/>
+                  <button type="submit" class="btn btn-outline-dark btn-sm" id="addSubcategory"
+                          v-on:click="addNewSubcategory">Lisa uus
+                  </button>
+              </div>
           </tr>
       </table>
       <br><br>
@@ -56,6 +61,7 @@ return {
            }
        ],
     divUpdateSubcategoryName: true,
+    divAddSubcategory: true,
    }
    },
     methods: {
@@ -91,6 +97,11 @@ return {
             }).catch(error => {
                 console.log(error)
             })
+        },
+
+        addNewSubcategory: function () {
+            this.divAddSubcategory = true
+            this.$router.push({name: 'addSubcategoryRoute'})
         },
     },
     mounted() {
