@@ -16,7 +16,7 @@
           </tr>
       </table>
       <br><br>
-      <div >
+      <div v-if="divUpdateSubcategoryName">
           <input type="text" v-model="newSubcategoryName">
           <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="updateSubcategoryName">Salvesta</button>
       </div>
@@ -55,10 +55,12 @@ return {
                ]
            }
        ],
+    divUpdateSubcategoryName: true,
    }
    },
     methods: {
         findExpenseCategories: function () {
+            this.divUpdateSubcategoryName = false
             this.$http.get("/setup/categories/expense", {
                     params: {
                         userId: this.userId
@@ -72,6 +74,7 @@ return {
             })
         },
         editSubcategoryName: function (subcategory) {
+            this.divUpdateSubcategoryName = true
             this.subcategoryId = subcategory.subcategoryId
             this.newSubcategoryName = subcategory.subcategoryName
         },
