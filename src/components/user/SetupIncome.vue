@@ -9,13 +9,18 @@
         <br> <br> <br> <br>
 
 
-        <div v-for="subcategory in category.subcategories" id="subcategory">
+        <div v-for="subcategory in category.subcategories" id="subcategory" >
           {{ subcategory.subcategoryName }}
 
           <button type="submit" class="btn btn-outline-dark btn-sm"
                   v-on:click="editSubcategoryName(subcategory)">Muuda
           </button>
-          <button type="submit" class="btn btn-outline-dark btn-sm">kustuta</button>
+            <div v-if="divDeactivateSubcategory">
+          <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="deactivateSubcategory">kustuta</button>
+<!--                <select >-->
+<!--                    <option v-for="subcategory in category.subcategories" :value="subcategories.categoryId">{{sub}}</option>-->
+<!--                </select>-->
+            </div>
         </div>
 
         <div>
@@ -92,7 +97,8 @@ export default {
       divUpdateSubcategoryName: true,
       divAddSubcategory: true,
       displayAddSubcategoryComponent: true,
-      displayNewIncomeComponent: false
+      displayNewIncomeComponent: false,
+        divDeactivateSubcategory: true
 
     }
 
@@ -139,6 +145,24 @@ export default {
       this.findIncomeCategories()
       this.displayAddSubcategoryComponent = false
     },
+      deactivateSubcategory: function () {
+          this.$http.patch("/setup/subcategory/status", this.subcategory.isActive, {
+                  params: {
+                      subcategoryId: this.subcategoryId,
+                      isActive: this.isActive = false
+                  }
+              }
+          ).then(response => {
+              this.findIncomeCategories()
+              console.log(response.data)
+          }).catch(error => {
+              console.log(error)
+          })
+
+
+          this.incomeCategories.isActive = false
+      },
+
     addNewIncomeCategory: function () {
       this.displayNewIncomeComponent = true
     },

@@ -35,7 +35,7 @@ export default {
     mounted() {
         // this.findIncomeCategories()
         //  this.findExpenseCategories()
-    },
+    }
 }
 </script>
 

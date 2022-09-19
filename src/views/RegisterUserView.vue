@@ -3,7 +3,7 @@
 
    <AlertError :errorMessage="errorMessage"/>
 
-    <input type="text" style="margin: 5px" placeholder="kasutajanimi" v-model="userRequest.userName"><br>
+    <input type="text" style="margin: 5px" placeholder="kasutajanimi" v-model="userRequest.username"><br>
     <input type="text" style="margin: 5px" placeholder="parool" v-model="userRequest.password"><br>
     <input type="text" style="margin: 5px" placeholder="email" v-model="userRequest.email"><br>
     <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="registerNewUser">Loo kasutaja</button>
@@ -27,7 +27,7 @@ export default {
       errorMessage: '',
         userExists : true,
       userRequest: {
-        userName: '',
+        username: '',
         password: '',
         email: ''
       },
@@ -40,7 +40,7 @@ export default {
     registerNewUser: function () {
       this.errorMessage = ''
 
-      if (this.userRequest.userName.length == 0 || this.userRequest.password.length == 0 || this.userRequest.email.length == 0) {
+      if (this.userRequest.username.length == 0 || this.userRequest.password.length == 0 || this.userRequest.email.length == 0) {
         this.errorMessage = 'Kõik väljad peavad olema täidetud'
       } else {
         this.$http.post("/login/register/user", this.userRequest
@@ -57,7 +57,6 @@ export default {
             errorMessage = errorMessage.replace('[', '')
             errorMessage = errorMessage.replace(']', '')
             this.errorMessage = errorMessage
-
 
           console.log(error.response.detail)
         });
