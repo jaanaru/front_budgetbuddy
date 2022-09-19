@@ -1,176 +1,175 @@
 <template>
 
-    <div>
-        <h2> {{ title }}</h2>
+  <div>
+    <h2> {{ title }}</h2>
 
-        <table>
-            <tr v-for="category in incomeCategories" id="mainCategory">
-                <td>{{ category.categoryName }}</td>
-                <br> <br> <br> <br>
-
-
-                <div v-for="subcategory in category.subcategories" id="subcategory">
-                    {{ subcategory.subcategoryName }}
-
-                    <button type="submit" class="btn btn-outline-dark btn-sm"
-                            v-on:click="editSubcategoryName(subcategory)">Muuda
-                    </button>
-                    <button type="submit" class="btn btn-outline-dark btn-sm">kustuta</button>
-                </div>
-
-                <div>
-                    <button type="submit" class="btn btn-outline-dark btn-sm" id="addSubcategory"
-                            v-on:click="addNewSubcategory">Lisa uus alamkategooria
-                    </button>
-                    <div v-if="displayAddSubcategoryComponent">
-                        <AddSubcategory :category-id="category.categoryId"
-                                        :display-component="displayAddSubcategoryComponent"
-                                        @successfulAddedNewSubcategoryEvent="refreshSubcategories"/>
-                    </div>
-
-                </div>
+    <table>
+      <tr v-for="category in incomeCategories" id="mainCategory">
+        <td>{{ category.categoryName }}</td>
+        <br> <br> <br> <br>
 
 
-            </tr>
-        </table>
+        <div v-for="subcategory in category.subcategories" id="subcategory">
+          {{ subcategory.subcategoryName }}
 
-
-        <br><br>
-        <div v-if="divUpdateSubcategoryName">
-            <input type="text" v-model="newSubcategoryName">
-            <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="updateSubcategoryName">Salvesta
-            </button>
+          <button type="submit" class="btn btn-outline-dark btn-sm"
+                  v-on:click="editSubcategoryName(subcategory)">Muuda
+          </button>
+          <button type="submit" class="btn btn-outline-dark btn-sm">kustuta</button>
         </div>
-        <br>
-<div>
-    <button type="submit" class="btn btn-outline-dark btn-lg" v-on:click="addNewIncomeCategory">Lisa uus peakategooria
-    </button>
-    <div v-if="displayNewIncomeComponent">
-        <AddIncomeCategory :user-id="this.userId"
-                           :display-component="displayNewIncomeComponent"
-                           @successfulAddedNewIncomeCategoryEvent="refreshCategories"/>
 
-    </div>
-</div>
+        <div>
+          <button type="submit" class="btn btn-outline-dark btn-sm" id="addSubcategory"
+                  v-on:click="addNewSubcategory">Lisa uus alamkategooria
+          </button>
+          <div v-if="displayAddSubcategoryComponent">
+            <AddSubcategory :category-id="category.categoryId"
+                            :display-component="displayAddSubcategoryComponent"
+                            @successfulAddedNewSubcategoryEvent="refreshSubcategories"/>
+          </div>
 
+        </div>
+
+
+      </tr>
+    </table>
+
+
+    <br><br>
+    <div v-if="divUpdateSubcategoryName">
+      <input type="text" v-model="newSubcategoryName">
+      <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="updateSubcategoryName">Salvesta
+      </button>
     </div>
+    <br>
+    <div>
+      <button type="submit" class="btn btn-outline-dark btn-lg" v-on:click="addNewCategory">Lisa uus peakategooria
+      </button>
+      <div v-if="displayNewIncomeComponent">
+        OLEN SIIN
+        <AddIncomeCategory :user-id="userId"
+                           @successfulAddedNewCategoryEvent="refreshCategories"/>
+
+      </div>
+    </div>
+
+  </div>
 
 </template>
 
 <script>
 import AddSubcategory from "@/components/user/AddSubcategory";
-import addIncomeCategory from "@/components/user/AddIncomeCategory";
+import AddIncomeCategory from "@/components/user/AddIncomeCategory";
 
 export default {
-    name: "SetupIncome",
-    components: {AddSubcategory, addIncomeCategory},
-    props: {
-        title: String,
-    },
+  name: "SetupIncome",
+  components: {AddSubcategory, AddIncomeCategory},
+  props: {
+    title: String,
+  },
 
-    data() {
-        return {
-            userId: sessionStorage.getItem('userId'),
-            newSubcategoryName: '',
-            subcategoryId: 0,
-            incomeCategories: [
-                {
-                    categoryId: 0,
-                    categoryName: "",
-                    subcategories: [
-                        {
-                            categoryId: 0,
-                            subcategoryId: 0,
-                            subcategoryName: "",
-                            isActive: true
-                        }
-                    ]
-                }
-            ],
-            divUpdateSubcategoryName: true,
-            divAddSubcategory: true,
-            displayAddSubcategoryComponent: false,
-            displayNewIncomeComponent: false
-
+  data() {
+    return {
+      userId: sessionStorage.getItem('userId'),
+      newSubcategoryName: '',
+      subcategoryId: 0,
+      incomeCategories: [
+        {
+          categoryId: 0,
+          categoryName: "",
+          subcategories: [
+            {
+              categoryId: 0,
+              subcategoryId: 0,
+              subcategoryName: "",
+              isActive: true
+            }
+          ]
         }
+      ],
+      divUpdateSubcategoryName: true,
+      divAddSubcategory: true,
+      displayAddSubcategoryComponent: true,
+      displayNewIncomeComponent: false
 
-    },
-    methods: {
-        findIncomeCategories: function () {
-            this.divUpdateSubcategoryName = false
-            this.$http.get("/setup/categories/income", {
-                    params: {
-                        userId: this.userId
-                    }
-                }
-            ).then(response => {
-                this.incomeCategories = response.data.categories
-                console.log("income kategooriad", response.data)
-            }).catch(error => {
-                console.log(error)
-            })
-        },
-        editSubcategoryName: function (subcategory) {
-            this.divUpdateSubcategoryName = true
-            this.subcategoryId = subcategory.subcategoryId
-            this.newSubcategoryName = subcategory.subcategoryName
-        },
-        updateSubcategoryName: function () {
-
-            this.$http.patch("/setup/subcategory/update", null, {
-                    params: {
-                        subcategoryId: this.subcategoryId,
-                        subcategoryName: this.newSubcategoryName
-                    }
-                }
-            ).then(response => {
-                this.findIncomeCategories()
-                console.log(response.data)
-            }).catch(error => {
-                console.log(error)
-            })
-        },
-        addNewSubcategory: function () {
-            this.displayAddSubcategoryComponent = true
-        },
-        refreshSubcategories: function () {
-            this.findIncomeCategories()
-            this.displayAddSubcategoryComponent = false
-        },
-        addNewIncomeCategory: function () {
-            this.displayNewIncomeComponent = true
-
-        },
-        refreshCategories: function () {
-            this.findIncomeCategories()
-            this.displayNewIncomeComponent = false
-                                      }
-
-    },
-
-
-    mounted() {
-        this.findIncomeCategories()
     }
+
+  },
+  methods: {
+    findIncomeCategories: function () {
+      this.divUpdateSubcategoryName = false
+      this.$http.get("/setup/categories/income", {
+            params: {
+              userId: this.userId
+            }
+          }
+      ).then(response => {
+        this.incomeCategories = response.data.categories
+        console.log("income kategooriad", response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    editSubcategoryName: function (subcategory) {
+      this.divUpdateSubcategoryName = true
+      this.subcategoryId = subcategory.subcategoryId
+      this.newSubcategoryName = subcategory.subcategoryName
+    },
+    updateSubcategoryName: function () {
+
+      this.$http.patch("/setup/subcategory/update", null, {
+            params: {
+              subcategoryId: this.subcategoryId,
+              subcategoryName: this.newSubcategoryName
+            }
+          }
+      ).then(response => {
+        this.findIncomeCategories()
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    addNewSubcategory: function () {
+      this.displayAddSubcategoryComponent = true
+    },
+    refreshSubcategories: function () {
+      this.findIncomeCategories()
+      this.displayAddSubcategoryComponent = false
+    },
+    addNewCategory: function () {
+      this.displayNewIncomeComponent = true
+    },
+    refreshCategories: function () {
+      this.findIncomeCategories()
+      this.displayNewIncomeComponent = true
+    }
+
+  },
+
+
+  mounted() {
+    this.findIncomeCategories()
+  }
 }
 </script>
 
 
 <style scoped>
 #mainCategory {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    border: 2px;
-    padding: 5px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  border: 2px;
+  padding: 5px;
 }
 
 #subcategiry {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    border: 2px;
-    padding: 2px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  border: 2px;
+  padding: 2px;
 }
 
 </style>

@@ -4,7 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/budget">Minu eelarve</router-link> |
       <router-link to="/report">Raport</router-link> |
-      <router-link to="/accounts">Minu kontod</router-link> |
+      <router-link to="/transactions">Minu tehingud</router-link> |
     </nav>
     <router-view/>
   </div>
