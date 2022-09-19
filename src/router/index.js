@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import RegisterUserView from "@/views/RegisterUserView";
 import StartBudgetView from "@/views/StartBudgetView";
 import AddSubcategory from "@/components/user/AddSubcategory";
+import TransactionsView from "@/views/TransactionsView";
 
 
 Vue.use(VueRouter)
@@ -29,7 +30,11 @@ const routes = [
     name: 'addSubcategoryRoute',
     component: AddSubcategory
   },
-
+  {
+    path:'/transactions',
+    name:'accountsTransactionsRoute',
+    component: TransactionsView
+  }
 ]
 
 const router = new VueRouter({
