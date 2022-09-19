@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" >
     <img alt="Vue logo" src="../assets/BudgetbuddyLogo.png" height="100px"
          width="120px">
     <LogIn title="Sisse logimine"/>
@@ -15,7 +15,8 @@ export default {
 }
 </script>
 
-<style scoped>
+
+<style >
 #mainCategory {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -32,6 +33,8 @@ export default {
     padding: 2px;
 }
 
-
-
 </style>
+
+
+
+

@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <div >
     <h2> {{ title }}</h2>
 
     <table>
@@ -16,7 +16,7 @@
                   v-on:click="editSubcategoryName(subcategory)">Muuda
           </button>
             <div v-if="divDeactivateSubcategory">
-          <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="deactivateSubcategory">kustuta</button>
+          <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="deactivateSubcategory(subcategory)">kustuta</button>
 <!--                <select >-->
 <!--                    <option v-for="subcategory in category.subcategories" :value="subcategories.categoryId">{{sub}}</option>-->
 <!--                </select>-->
@@ -145,11 +145,11 @@ export default {
       this.findIncomeCategories()
       this.displayAddSubcategoryComponent = false
     },
-      deactivateSubcategory: function () {
-          this.$http.patch("/setup/subcategory/status", this.subcategory.isActive, {
+      deactivateSubcategory: function (subcategory) {
+          this.$http.patch("/setup/subcategory/status", null, {
                   params: {
-                      subcategoryId: this.subcategoryId,
-                      isActive: this.isActive = false
+                      subcategoryId: subcategory.subcategoryId,
+                      isActive: false
                   }
               }
           ).then(response => {
@@ -190,7 +190,7 @@ export default {
   padding: 5px;
 }
 
-#subcategiry {
+#subcategory {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

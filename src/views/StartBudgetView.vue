@@ -2,11 +2,10 @@
     <div id="startBudget">
 
         <h1> Loo oma eelarve</h1><br>
-        <div><SetupIncome title='Tulukategooria'/></div>
+        <div id="setupIncome"><SetupIncome title='Tulukategooria'/></div>
 
-        <br><br>
 
-        <div><SetupExpense title='Kulukategooria'/></div>
+        <div id="setupExpense"><SetupExpense title='Kulukategooria'/></div>
 
         <div>
 
@@ -49,8 +48,8 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: -webkit-center;
     color: #380B61;
-
 }
+
 
 nav {
     padding: 30px;

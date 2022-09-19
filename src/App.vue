@@ -11,6 +11,10 @@
 </template>
 
 <style>
+body {
+    background-image: url("./assets/BudgetbuddyBackground.jpg");
+    background-size: 1200px 900px;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
