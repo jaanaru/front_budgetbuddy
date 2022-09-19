@@ -27,11 +27,11 @@ export default {
             this.$http.post("/setup/category/income/add", null, {
                     params: {
                         userId: this.userId,
-                        categoryName: this.categoryName
+                        categoryName: this.incomeCategoryName
                     }
                 }
             ).then(response => {
-                this.$emit('successfulAddedNewCategoryEvent')
+                this.$emit('successfulAddedNewIncomeCategoryEvent')
                 console.log(response.data)
             }).catch(error => {
                 console.log(error)

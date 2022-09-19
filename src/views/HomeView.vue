@@ -15,3 +15,23 @@ export default {
 }
 </script>
 
+<style scoped>
+#mainCategory {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border: 2px;
+    padding: 5px;
+}
+
+#subcategory {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border: 2px;
+    padding: 2px;
+}
+
+
+
+</style>
