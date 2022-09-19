@@ -6,7 +6,8 @@
         <TransactionTableHeader/>
         <TransactionTableInputFields/>
         </thead>
-        <TransactionTableBody :transaction-infos="transactionInfos"/>
+        <TransactionTableBody :transaction-infos="transactionInfos"
+                              :accountId="accountId"/>
 
       </table>
     </div>
@@ -25,6 +26,7 @@ export default {
   components: {TransactionTableBody, TransactionTableInputFields, TransactionTableHeader},
   data: function () {
     return {
+accountId:1,
       transactionInfos:
           [
             {
@@ -41,22 +43,25 @@ export default {
           ]
     }
   },
-  methods: {
-    findTransactionsByUserId: function () {
-      this.$http.get("budget/transaction/all", {
-            params: {
-              transactionId: this.transactionId
+    methods: {
+      findTransactionsByAccountId: function () {
+        this.$http.get("budget/transaction/all", {
+              params: {
+                accountId: this.accountId
+              }
             }
-          }
-      ).then(response => {
-        this.transactions = response.data
+        ).then(response => {
+          this.transactionInfos = response.data.transactionInfos
 
-      }).catch(error => {
-        console.log(error)
-      })
+        }).catch(error => {
+          console.log(error)
+        })
+      },
     },
+    mounted() {
+      this.findTransactionsByAccountId()
+    }
 
-  }
 }
 
 </script>
