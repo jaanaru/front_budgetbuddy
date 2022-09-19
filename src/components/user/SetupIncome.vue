@@ -42,13 +42,15 @@
       </button>
     </div>
     <br>
+
+
     <div>
-      <button type="submit" class="btn btn-outline-dark btn-lg" v-on:click="addNewCategory">Lisa uus peakategooria
+      <button type="submit" class="btn btn-outline-dark btn-lg" v-on:click="addNewIncomeCategory">Lisa uus peakategooria
       </button>
       <div v-if="displayNewIncomeComponent">
-        OLEN SIIN
+
         <AddIncomeCategory :user-id="userId"
-                           @successfulAddedNewCategoryEvent="refreshCategories"/>
+                           @successfulAddedNewIncomeCategoryEvent="refreshCategories"/>
 
       </div>
     </div>
@@ -137,12 +139,12 @@ export default {
       this.findIncomeCategories()
       this.displayAddSubcategoryComponent = false
     },
-    addNewCategory: function () {
+    addNewIncomeCategory: function () {
       this.displayNewIncomeComponent = true
     },
     refreshCategories: function () {
       this.findIncomeCategories()
-      this.displayNewIncomeComponent = true
+      this.displayNewIncomeComponent = false
     }
 
   },
