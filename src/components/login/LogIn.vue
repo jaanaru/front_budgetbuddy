@@ -91,6 +91,6 @@ export default {
 
 <style>
 #link {
-    color: 	#FFFFFF
+    color: 	#390A7A
 }
 </style>

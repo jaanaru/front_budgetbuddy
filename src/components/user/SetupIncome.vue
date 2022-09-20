@@ -182,7 +182,7 @@ export default {
 <style scoped>
 #income {
     background-color: aliceblue;
-    color: #0C0B0B;
+    color: #390A7A;
 }
 #mainCategory {
   font-family: Avenir, Helvetica, Arial, sans-serif;

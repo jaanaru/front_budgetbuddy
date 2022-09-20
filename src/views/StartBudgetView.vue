@@ -32,8 +32,7 @@ export default {
 
     },
     mounted() {
-        // this.findIncomeCategories()
-        //  this.findExpenseCategories()
+
     }
 }
 </script>
@@ -47,10 +46,16 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: -webkit-center;
-    color: #A5D3F7
-;
+    color: #390A7A;
 }
-
+#setupIncome{
+    width: 50%;
+    float: left;
+}
+#setupExpense {
+    width: 50%;
+    float: right;
+}
 
 nav {
     padding: 30px;
@@ -58,11 +63,11 @@ nav {
 
 nav a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #390A7A;
 }
 
 nav a.router-link-exact-active {
-    color: #42b983;
+    color: #390A7A;
 }
 
 </style>

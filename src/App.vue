@@ -12,7 +12,7 @@
 
 <style>
 body {
-    background-image: url("./assets/BudgetbuddyBackground.jpg");
+    background-color: aliceblue;
     background-size: 1200px 900px;
 }
 #app {
@@ -20,7 +20,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: 	#0C0B0B;
+  color: 	#390A7A;
 
 
 }
@@ -31,11 +31,11 @@ nav {
 
 nav a {
   font-weight: bold;
-  color: 	#FFFFFF;
+  color: 	#390A7A;
 }
 
 nav a.router-link-exact-active {
-  color: 	#FFFFFF;
+  color: 	#390A7A;
 }
 
 </style>

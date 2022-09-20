@@ -173,7 +173,7 @@ return {
 <style scoped>
 #expense {
     background-color: aliceblue;
-    color: #0C0B0B;
+    color: #390A7A;
 }
 #mainCategory {
     border: 2px ;
