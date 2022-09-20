@@ -7,6 +7,7 @@
     <th scope="col">Memo</th>
     <th scope="col">Väljaminek</th>
     <th scope="col">Sissetulek</th>
+    <th scope="col"></th>
   </tr>
   </thead>
 </template>

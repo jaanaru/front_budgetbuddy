@@ -4,10 +4,6 @@
       <table class="table table-hover table-light">
         <TransactionTableHeader/>
         <TransactionTableBody/>
-
-
-
-
       </table>
     </div>
   </div>

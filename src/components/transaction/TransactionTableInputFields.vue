@@ -24,7 +24,6 @@ export default {
       sessionStorage.setItem('senderAccountId', transaction.senderAccountId)
       sessionStorage.setItem('subCategoryId',transaction.subcategoryId)
       sessionStorage.setItem('Memo',transaction.description)
-      //Transaction amount kuidas? Type inc, outg jne.
       sessionStorage.setItem('transactionAmount', transaction.amount)
       sessionStorage.setItem('transactionAmount',transaction.amount)
 
