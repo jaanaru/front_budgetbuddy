@@ -3,8 +3,6 @@
 
         <h1> Loo oma eelarve</h1><br>
         <div id="setupIncome"><SetupIncome title='Tulukategooria'/></div>
-
-
         <div id="setupExpense"><SetupExpense title='Kulukategooria'/></div>
 
         <div>
@@ -25,11 +23,8 @@ export default {
     data() {
         return {
         }
-
     },
-
     methods: {
-
     },
     mounted() {
 

@@ -2,7 +2,7 @@
   <div id="app">
     <nav>
       <router-link to="/">Home</router-link> |
-      <router-link to="/budget">Minu eelarve</router-link> |
+      <router-link to="/mybudget">Minu eelarve</router-link> |
       <router-link to="/report">Raport</router-link> |
       <router-link to="/transactions">Minu tehingud</router-link> |
         <router-link to="/account">Kontod</router-link>
