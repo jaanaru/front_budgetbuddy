@@ -1,56 +1,65 @@
-<!--<template>-->
-
-<!--jäi pooleli, kuna sooviks enne kuvada olemasolevad kontod ning siis lisada-->
+<template>
 
 
+    <div>
+        <table class="table-hover">
+          <thead>
+          <tr>
+              <th scope="col">Minu kontod</th>
+          </tr>
+          </thead>
 
+            <tbody>
+            <tr v-for="account in accountInfos">
+                <td>{{account.accountName}}</td>
+            </tr>
+            </tbody>
 
+        </table>
 
+    </div>
+</template>
 
-<!--    <div>-->
+<script>
+export default {
+    name: "AccountView",
+    data: function () {
+        return {
+            userId: sessionStorage.getItem('userId'),
+            accountInfos: [
+                {
+                    id: 0,
+                    accountName: '',
+                    balance: 0,
+                    isActive: true
+                }
+            ]
+        }
 
-<!--        <h1> Minu kontod </h1>-->
-<!--        <br>-->
-<!--        <br>-->
+    },
+    methods: {
+        findAccounts: function () {
+                this.$http.get("/budget/account/all", {
+                        params: {
+                            userId: this.userId
+                        }
+                    }
+                ).then(response => {
+                    this.accountInfos = response.data
+                    console.log("kontod", response.data)
+                }).catch(error => {
+                    console.log(error)
+                })
+            }
+        },
 
-<!--        <table>-->
-<!--            <tr>-->
-<!--                <th>Konto nimi</th>-->
-<!--                <th>Kirjeldus</th>-->
-<!--            </tr>-->
-<!--            <tr v-for="account in accounts">-->
-<!--                <th>{{ account.name }}</th>-->
-<!--                <th>{{ account.description }}</th>-->
+        mounted() {
+        this.findAccounts()
+        }
+}
 
-<!--            </tr>-->
-<!--        </table>-->
+</script>
 
-<!--    </div>-->
-<!--</template>-->
+<style scoped>
 
-<!--<script>-->
-<!--export default {-->
-<!--    name: "AccountView",-->
-<!--    data: function () {-->
-<!--        return {-->
-<!--            userId: sessionStorage.getItem(userId),-->
-<!--            accounts: [-->
-<!--                {-->
-<!--                    accountTypeId: 0,-->
-<!--                    name: "",-->
-<!--                    description: "",-->
-<!--                    balance: 0-->
-<!--                }-->
-<!--            ]-->
-<!--        }-->
-
-<!--    },-->
-<!--    methods : {-->
-
-<!--    }-->
-<!--}-->
-<!--</script>-->
-
-<!--<style scoped>-->
-
-<!--</style>-->
+</style>

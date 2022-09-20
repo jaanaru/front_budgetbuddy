@@ -5,7 +5,7 @@
 
     <table>
       <tr v-for="category in incomeCategories" id="mainCategory">
-        <td>{{ category.categoryName }}</td>
+        <td >{{ category.categoryName }}</td>
         <br> <br> <br> <br>
 
 

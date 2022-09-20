@@ -20,9 +20,9 @@ import BudgetView from "@/views/BudgetView";
 export default {
     name: "LogIn",
     components: {AlertError, BudgetView},
-    // props: {
-    //     title: String
-    // },  EI TEA KAS SEDA ON VAJA
+    props: {
+        title: String
+    },
     data: function () {
         return {
             errorMessage: '',
@@ -53,23 +53,16 @@ export default {
                 this.$http.post("/login/log-in", this.loginRequest
                 ).then(response => {
                     this.userInfo = response.data
-                    sessionStorage.setItem('userId', this.loginRequest.userId)
+                    sessionStorage.setItem('userId', this.userInfo.userId)
                     this.$router.push({name: 'myMonthlyBudget'})
 
 
                 }).catch(error => {
-                    this.alertError = error.response.data.detail
+                    this.errorMessage = 'Kasutajanimi või parool on vale'
+                    this.errorMessage = error.response.data.detail
                 })
             }
     },
-
-
-//
-//     navigateToCustomerHomeView: function () {
-//         sessionStorage.setItem('userId', this.userInfo.userId)
-//         sessionStorage.setItem('accounts', this.userInfo.accounts)
-//         this.$router.push({name: 'accountsTransactionsRoute', query: {userId: this.userInfo.userId}})
-// }
 
 
 }
