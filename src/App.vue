@@ -5,6 +5,7 @@
       <router-link to="/budget">Minu eelarve</router-link> |
       <router-link to="/report">Raport</router-link> |
       <router-link to="/transactions">Minu tehingud</router-link> |
+        <router-link to="/account">Kontod</router-link>
     </nav>
     <router-view/>
   </div>

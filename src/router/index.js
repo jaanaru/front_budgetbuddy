@@ -6,6 +6,7 @@ import StartBudgetView from "@/views/StartBudgetView";
 import AddSubcategory from "@/components/user/AddSubcategory";
 import TransactionsView from "@/views/TransactionsView";
 import BudgetView from "@/views/BudgetView";
+import AccountView from "@/views/AccountView";
 
 
 Vue.use(VueRouter)
@@ -39,7 +40,12 @@ const routes = [
   {
     path: '/budget',
     name: 'myMonthlyBudget',
-    component: BudgetView,
+    component: BudgetView
+  },
+  {
+    path: '/account',
+    name: 'accountRoute',
+    component: AccountView
   }
 ]
 
