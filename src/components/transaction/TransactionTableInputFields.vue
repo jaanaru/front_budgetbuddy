@@ -11,7 +11,7 @@
     <td><input type="number" placeholder="Väljaminek"/></td>
     <td><input type="number" placeholder="Sissetulek"/></td>
     <td>
-      <button type="button" style="margin: 5px" class="btn btn-light" v-on:click="">Lisa</button>
+      <button type="submit" style="margin: 5px" class="btn btn-light" v-on:click="">Lisa</button>
     </td>
   </tr>
 </template>

@@ -2,7 +2,7 @@
   <thead>
   <tr>
     <th scope="col">Kuupäev</th>
-    <th scope="col">Payee</th>
+    <th scope="col">Konto</th>
     <th scope="col">Kategooria</th>
     <th scope="col">Memo</th>
     <th scope="col">Väljaminek</th>
