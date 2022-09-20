@@ -8,7 +8,7 @@
             <input type="password" style="margin: 5px" placeholder="parool" v-model="loginRequest.password"><br>
             <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="logIn">Logi sisse</button>
             <br>
-            <router-link to="/register">Registreeri uus kasutaja</router-link>
+            <router-link to="/register" id="link">Registreeri uus kasutaja</router-link>
         </div>
 
     </div>
@@ -90,5 +90,7 @@ export default {
 </script>
 
 <style>
-
+#link {
+    color: 	#FFFFFF
+}
 </style>

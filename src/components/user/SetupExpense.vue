@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <div id="expense">
     <h2> {{ title }}</h2>
 
       <table>
@@ -12,7 +12,7 @@
               <div v-for="subcategory in category.subcategories" id="subcategiry">
                   {{ subcategory.subcategoryName }}
                   <button type="submit" class="btn btn-outline-dark btn-sm"v-on:click="editSubcategoryName(subcategory)">muuda</button>
-                  <button type="submit" class="btn btn-outline-dark btn-sm">kustuta</button>
+                  <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="deactivateSubcategory(subcategory)">kustuta</button>
               </div>
 
               <div>
@@ -136,6 +136,23 @@ return {
             this.findExpenseCategories()
             this.displayAddSubcategoryComponent = false
         },
+        deactivateSubcategory: function (subcategory) {
+            this.$http.patch("/setup/subcategory/status", null, {
+                    params: {
+                        subcategoryId: subcategory.subcategoryId,
+                        isActive: false
+                    }
+                }
+            ).then(response => {
+                this.findExpenseCategories()
+                console.log(response.data)
+            }).catch(error => {
+                console.log(error)
+            })
+
+
+            this.expenseCategories.isActive = false
+        },
         addNewExpenseCategory: function () {
           this.displayNewExpenseComponent =true
         },
@@ -143,7 +160,8 @@ return {
         refreshCategories: function () {
             this.findExpenseCategories()
             this.displayNewExpenseComponent = false
-        }
+        },
+
     },
     mounted() {
         this.findExpenseCategories()
@@ -153,6 +171,10 @@ return {
 </script>
 
 <style scoped>
+#expense {
+    background-color: aliceblue;
+    color: #0C0B0B;
+}
 #mainCategory {
     border: 2px ;
     padding: 5px;

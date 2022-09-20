@@ -1,6 +1,6 @@
 <template>
 
-  <div >
+  <div id="income">
     <h2> {{ title }}</h2>
 
     <table>
@@ -15,12 +15,10 @@
           <button type="submit" class="btn btn-outline-dark btn-sm"
                   v-on:click="editSubcategoryName(subcategory)">Muuda
           </button>
-            <div v-if="divDeactivateSubcategory">
+
           <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="deactivateSubcategory(subcategory)">kustuta</button>
-<!--                <select >-->
-<!--                    <option v-for="subcategory in category.subcategories" :value="subcategories.categoryId">{{sub}}</option>-->
-<!--                </select>-->
-            </div>
+
+
         </div>
 
         <div>
@@ -98,7 +96,7 @@ export default {
       divAddSubcategory: true,
       displayAddSubcategoryComponent: true,
       displayNewIncomeComponent: false,
-        divDeactivateSubcategory: true
+
 
     }
 
@@ -182,6 +180,10 @@ export default {
 
 
 <style scoped>
+#income {
+    background-color: aliceblue;
+    color: #0C0B0B;
+}
 #mainCategory {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
