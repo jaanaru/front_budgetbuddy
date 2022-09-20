@@ -1,16 +1,20 @@
 <template>
-    <div >
+  <div>
 
-        <h1> Minu eelarve</h1><br>
-        <div id="setupIncome"><SetupIncomeWithData title='Tulukategooria'/></div>
-
-        <div id="setupExpense"><SetupExpenseWithData title='Kulukategooria'/></div>
-
-        <div>
-
-        </div>
-        <br><br>
+    <h1> Minu eelarve</h1><br>
+    <div id="setupIncome">
+      <SetupIncomeWithData title='Tulukategooria'/>
     </div>
+
+    <div id="setupExpense">
+      <SetupExpenseWithData title='Kulukategooria'/>
+    </div>
+
+    <div>
+
+    </div>
+    <br><br>
+  </div>
 </template>
 
 <script>
@@ -18,24 +22,17 @@ import SetupIncomeWithData from "@/components/user/SetupIncomeWithData";
 import SetupExpenseWithData from "@/components/user/SetupExpenseWithData";
 
 export default {
-    name: "BudgetView",
-    components: {SetupIncomeWithData, SetupExpenseWithData},
-    data() {
-        return {
-        }
+  name: "BudgetView",
+  components: {SetupIncomeWithData, SetupExpenseWithData},
+  data() {
+    return {}
 
-    },
+  },
 
-    methods: {
+  methods: {},
+  mounted() {
 
-    },
-    mounted() {
-
-    }
+  }
 }
 
 </script>
-
-<style scoped>
-
-</style>

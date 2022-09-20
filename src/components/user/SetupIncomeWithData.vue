@@ -3,8 +3,8 @@
   <div id="income">
     <h2> {{ title }}</h2>
 
-    <table class="table">
-      <thead class="thead-dark">
+    <table class="table table-hover table-light">
+      <thead>
       <tr>
         <th scope="col">Kategooria</th>
         <th scope="col">Subkategooria</th>
@@ -13,8 +13,10 @@
         <th scope="col">Jääk</th>
       </tr>
       </thead>
+
       <tbody>
       <div v-for="category in incomeCategories" id="mainCategory">
+
         <tr>
           <td>{{ category.categoryName }}</td>
           <td></td>
@@ -33,13 +35,11 @@
           </tr>
         </div>
 
+
       </div>
       </tbody>
     </table>
 
-
-    <br><br>
-    <br>
 
   </div>
 
@@ -112,26 +112,3 @@ export default {
 </script>
 
 
-<style scoped>
-#income {
-  background-color: aliceblue;
-  color: #390A7A;
-}
-
-#mainCategory {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  border: 2px;
-  padding: 5px;
-}
-
-#subcategory {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  border: 2px;
-  padding: 2px;
-}
-
-</style>
