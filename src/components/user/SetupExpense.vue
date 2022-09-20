@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <div id="expense">
     <h2> {{ title }}</h2>
 
       <table>
@@ -12,7 +12,7 @@
               <div v-for="subcategory in category.subcategories" id="subcategiry">
                   {{ subcategory.subcategoryName }}
                   <button type="submit" class="btn btn-outline-dark btn-sm"v-on:click="editSubcategoryName(subcategory)">muuda</button>
-                  <button type="submit" class="btn btn-outline-dark btn-sm">kustuta</button>
+                  <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="deactivateSubcategory(subcategory)">kustuta</button>
               </div>
 
               <div>
@@ -26,17 +26,28 @@
                   </div>
               </div>
 
+
           </tr>
       </table>
+
+
       <br><br>
+
+
       <div v-if="divUpdateSubcategoryName">
           <input type="text" v-model="newSubcategoryName">
           <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="updateSubcategoryName">Salvesta</button>
       </div>
 
       <div>
-          <button type="submit">Lisa uus peakategooria
+          <button type="submit" class="btn btn-outline-dark btn-lg" v-on:click="addNewExpenseCategory">Lisa uus peakategooria
           </button>
+          <div v-if="displayNewExpenseComponent">
+
+              <AddExpenseCategory :user-id="userId"
+                                 @successfulAddedNewExpenseCategoryEvent="refreshCategories"/>
+
+          </div>
       </div>
 
   </div>
@@ -48,10 +59,11 @@
 
 <script>
 import AddSubcategory from "@/components/user/AddSubcategory";
+import AddExpenseCategory from "@/components/user/AddExpenseCategory";
 
 export default {
   name: "SetupExpense",
-    components: {AddSubcategory},
+    components: {AddSubcategory, AddExpenseCategory},
     props: {
       title: String,
     },
@@ -61,9 +73,7 @@ return {
     userId: sessionStorage.getItem('userId'),
     newSubcategoryName: '',
     subcategoryId: 0,
-
-
-       expenseCategories: [
+    expenseCategories: [
            {
                categoryId: 0,
                categoryName: "",
@@ -79,7 +89,8 @@ return {
        ],
     divUpdateSubcategoryName: true,
     divAddSubcategory: true,
-    displayAddSubcategoryComponent: false
+    displayAddSubcategoryComponent: true,
+    displayNewExpenseComponent: false
    }
    },
     methods: {
@@ -125,6 +136,32 @@ return {
             this.findExpenseCategories()
             this.displayAddSubcategoryComponent = false
         },
+        deactivateSubcategory: function (subcategory) {
+            this.$http.patch("/setup/subcategory/status", null, {
+                    params: {
+                        subcategoryId: subcategory.subcategoryId,
+                        isActive: false
+                    }
+                }
+            ).then(response => {
+                this.findExpenseCategories()
+                console.log(response.data)
+            }).catch(error => {
+                console.log(error)
+            })
+
+
+            this.expenseCategories.isActive = false
+        },
+        addNewExpenseCategory: function () {
+          this.displayNewExpenseComponent =true
+        },
+
+        refreshCategories: function () {
+            this.findExpenseCategories()
+            this.displayNewExpenseComponent = false
+        },
+
     },
     mounted() {
         this.findExpenseCategories()
@@ -134,6 +171,10 @@ return {
 </script>
 
 <style scoped>
+#expense {
+    background-color: aliceblue;
+    color: #390A7A;
+}
 #mainCategory {
     border: 2px ;
     padding: 5px;

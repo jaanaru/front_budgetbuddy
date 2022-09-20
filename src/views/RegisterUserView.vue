@@ -58,7 +58,6 @@ export default {
             errorMessage = errorMessage.replace(']', '')
             this.errorMessage = errorMessage
 
-
           console.log(error.response.detail)
         });
       }

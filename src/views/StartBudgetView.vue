@@ -2,11 +2,10 @@
     <div id="startBudget">
 
         <h1> Loo oma eelarve</h1><br>
-        <div><SetupIncome title='Tulukategooria'/></div>
+        <div id="setupIncome"><SetupIncome title='Tulukategooria'/></div>
 
-        <br><br>
 
-        <div><SetupExpense title='Kulukategooria'/></div>
+        <div id="setupExpense"><SetupExpense title='Kulukategooria'/></div>
 
         <div>
 
@@ -34,7 +33,7 @@ export default {
     },
     mounted() {
 
-    },
+    }
 }
 </script>
 
@@ -47,8 +46,15 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: -webkit-center;
-    color: #380B61;
-
+    color: #390A7A;
+}
+#setupIncome{
+    width: 50%;
+    float: left;
+}
+#setupExpense {
+    width: 50%;
+    float: right;
 }
 
 nav {
@@ -57,11 +63,11 @@ nav {
 
 nav a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #390A7A;
 }
 
 nav a.router-link-exact-active {
-    color: #42b983;
+    color: #390A7A;
 }
 
 </style>

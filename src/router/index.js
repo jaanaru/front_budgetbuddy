@@ -5,6 +5,7 @@ import RegisterUserView from "@/views/RegisterUserView";
 import StartBudgetView from "@/views/StartBudgetView";
 import AddSubcategory from "@/components/user/AddSubcategory";
 import TransactionsView from "@/views/TransactionsView";
+import BudgetView from "@/views/BudgetView";
 
 
 Vue.use(VueRouter)
@@ -34,6 +35,11 @@ const routes = [
     path:'/transactions',
     name:'accountsTransactionsRoute',
     component: TransactionsView
+  },
+  {
+    path: '/budget',
+    name: 'myMonthlyBudget',
+    component: BudgetView,
   }
 ]
 

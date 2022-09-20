@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <div id="income">
     <h2> {{ title }}</h2>
 
     <table>
@@ -9,13 +9,16 @@
         <br> <br> <br> <br>
 
 
-        <div v-for="subcategory in category.subcategories" id="subcategory">
+        <div v-for="subcategory in category.subcategories" id="subcategory" >
           {{ subcategory.subcategoryName }}
 
           <button type="submit" class="btn btn-outline-dark btn-sm"
                   v-on:click="editSubcategoryName(subcategory)">Muuda
           </button>
-          <button type="submit" class="btn btn-outline-dark btn-sm">kustuta</button>
+
+          <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="deactivateSubcategory(subcategory)">kustuta</button>
+
+
         </div>
 
         <div>
@@ -42,13 +45,15 @@
       </button>
     </div>
     <br>
+
+
     <div>
-      <button type="submit" class="btn btn-outline-dark btn-lg" v-on:click="addNewCategory">Lisa uus peakategooria
+      <button type="submit" class="btn btn-outline-dark btn-lg" v-on:click="addNewIncomeCategory">Lisa uus peakategooria
       </button>
       <div v-if="displayNewIncomeComponent">
-        OLEN SIIN
+
         <AddIncomeCategory :user-id="userId"
-                           @successfulAddedNewCategoryEvent="refreshCategories"/>
+                           @successfulAddedNewIncomeCategoryEvent="refreshCategories"/>
 
       </div>
     </div>
@@ -90,7 +95,8 @@ export default {
       divUpdateSubcategoryName: true,
       divAddSubcategory: true,
       displayAddSubcategoryComponent: true,
-      displayNewIncomeComponent: false
+      displayNewIncomeComponent: false,
+
 
     }
 
@@ -137,12 +143,30 @@ export default {
       this.findIncomeCategories()
       this.displayAddSubcategoryComponent = false
     },
-    addNewCategory: function () {
+      deactivateSubcategory: function (subcategory) {
+          this.$http.patch("/setup/subcategory/status", null, {
+                  params: {
+                      subcategoryId: subcategory.subcategoryId,
+                      isActive: false
+                  }
+              }
+          ).then(response => {
+              this.findIncomeCategories()
+              console.log(response.data)
+          }).catch(error => {
+              console.log(error)
+          })
+
+
+          this.incomeCategories.isActive = false
+      },
+
+    addNewIncomeCategory: function () {
       this.displayNewIncomeComponent = true
     },
     refreshCategories: function () {
       this.findIncomeCategories()
-      this.displayNewIncomeComponent = true
+      this.displayNewIncomeComponent = false
     }
 
   },
@@ -156,6 +180,10 @@ export default {
 
 
 <style scoped>
+#income {
+    background-color: aliceblue;
+    color: #390A7A;
+}
 #mainCategory {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -164,7 +192,7 @@ export default {
   padding: 5px;
 }
 
-#subcategiry {
+#subcategory {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
