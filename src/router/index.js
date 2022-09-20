@@ -37,7 +37,7 @@ const routes = [
     component: TransactionsView
   },
   {
-    path: '/budget',
+    path: '/mybudget',
     name: 'myMonthlyBudget',
     component: BudgetView,
   }
