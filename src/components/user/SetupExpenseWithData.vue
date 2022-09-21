@@ -173,17 +173,20 @@ export default {
 </script>
 
 <style scoped>
-/*#expense {*/
-/*  background-color: aliceblue;*/
-/*  color: #390A7A;*/
-/*}*/
-/*#mainCategory {*/
-/*  border: 2px ;*/
-/*  padding: 5px;*/
-/*}*/
-/*#subcategiry {*/
-/*  border: 2px ;*/
-/*  padding: 2px;*/
-/*}*/
+
+
+#expense {
+  background-color: aliceblue;
+  color: #390A7A;
+  font-size: large;
+}
+#mainCategory {
+  border: 2px ;
+  padding: 5px;
+}
+#subcategiry {
+  border: 2px ;
+  padding: 2px;
+}
 
 </style>

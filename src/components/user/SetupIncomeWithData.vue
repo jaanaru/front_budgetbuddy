@@ -23,19 +23,22 @@
       </div>
       <div class="row" v-for="category in incomeBudgetInfo.categories">
         <div class="col-sm">
-          <p class="text-center">{{ category.categoryName }}</p>
+          <p class="text-left">{{ category.categoryName }}</p>
         </div>
 
         <div class="col-sm">
           <div class="row">&nbsp;</div>
 
           <div class="row" v-for="subcategory in category.subcategories">
-            {{ subcategory.subcategoryName }}
+            <p class="text-center">{{ subcategory.subcategoryName }}</p>
+
           </div>
         </div>
 
         <div class="col-sm">
-          <div class="row">{{ category.categoryBudgetedSum }}</div>
+          <div class="row">
+            <p class="text-center">{{ category.categoryBudgetedSum }}</p>
+            </div>
 
           <div class="row" v-for="subcategory in category.subcategories">
             <input input class="form-control form-control-sm" v-model="subcategory.subcategoryBudgetedSum">
@@ -43,18 +46,23 @@
         </div>
 
         <div class="col-sm">
-          <div class="row">{{ category.categorySum }}</div>
+          <div class="row">
+            <p class="text-center">{{ category.categorySum }}</p>
+            </div>
           <div class="row" v-for="subcategory in category.subcategories">
-            {{ subcategory.subcategorySum }}
+            <p class="text-center">{{ subcategory.subcategorySum }}</p>
           </div>
         </div>
 
         <!--   jääk     -->
         <div class="col-sm">
-          <div class="row">{{ category.categoryBudgetedSum - category.categorySum }}</div>
+          <div class="row">
+            <p class="text-center">{{ category.categoryBudgetedSum - category.categorySum }}</p>
+          </div>
 
           <div class="row" v-for="subcategory in category.subcategories">
-            {{ subcategory.subcategoryBudgetedSum - subcategory.subcategorySum }}
+            <p class="text-center">{{ subcategory.subcategoryBudgetedSum - subcategory.subcategorySum }}</p>
+
           </div>
         </div>
 
@@ -63,7 +71,7 @@
       <div class="row">
 
         <div class="col-sm">
-          <p class="text-center">Kokku</p>
+          <p class="text-left">Kokku</p>
         </div>
 
         <div class="col-sm">
@@ -71,15 +79,21 @@
         </div>
 
         <div class="col-sm">
-          <div class="row">{{ incomeBudgetInfo.totalBudgetedSum }}</div>
+          <div class="row">
+            <p class="text-center">{{ incomeBudgetInfo.totalBudgetedSum }}</p>
+          </div>
         </div>
 
         <div class="col-sm">
-          <div class="row">{{ incomeBudgetInfo.totalSum }}</div>
+          <div class="row">
+            <p class="text-center">{{ incomeBudgetInfo.totalSum }}</p>
+          </div>
         </div>
 
         <div class="col-sm">
-          <div class="row"> {{ incomeBudgetInfo.totalBudgetedSum - incomeBudgetInfo.totalSum }};</div>
+          <div class="row">
+            <p class="text-center">{{ incomeBudgetInfo.totalBudgetedSum - incomeBudgetInfo.totalSum }}</p>
+          </div>
         </div>
 
       </div>
