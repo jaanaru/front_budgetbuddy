@@ -1,51 +1,106 @@
 <template>
 
+
+  <!--<TODO>-->
+  <!--  Teha Eelarve TotalSum osad ka reaktiivseks-->
+  <!--  Lisada Kuuu ja aasta valik-->
+  <!--  Lisada Salvesta nupp, mis salvestab Eelarve summad databaasi-->
+  <!--</TODO>-->
+
+
+
   <div id="expense">
-    <h2> {{ title }}</h2>
 
-    <table class="table">
-
-      <tr>
-        <th scope="col">Kategooria</th>
-        <th scope="col">Subkategooria</th>
-        <th scope="col">Eelarve</th>
-        <th scope="col">Tegelik</th>
-        <th scope="col">Jääk</th>
-      </tr>
-
-      <div v-for="category in expenseCategories" id="mainCategory">
-        <tr>
-          <td>{{ category.categoryName }}</td>
-          <td></td>
-          <td>{{ category.categoryBudgetedSum }}</td>
-          <td>{{ category.categorySum }}</td>
-          <td>200.00</td>
-        </tr>
-
-        <div v-for="subcategory in category.subcategories" id="subcategory">
-          <tr>
-            <td></td>
-            <td>{{ subcategory.subcategoryName }}</td>
-            <td>{{ subcategory.subcategoryBudgetedSum }}</td>
-            <td>{{ subcategory.subcategorySum }}</td>
-            <td>50.00</td>
-          </tr>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <p class="text-center">Kategooria</p>
+        </div>
+        <div class="col-sm">
+          <p class="text-center">Subkategooria</p>
+        </div>
+        <div class="col-sm">
+          <p class="text-center">Eelarve</p>
+        </div>
+        <div class="col-sm">
+          <p class="text-center">Tegelik</p>
+        </div>
+        <div class="col-sm">
+          <p class="text-center">Jääk</p>
         </div>
       </div>
+      <div class="row" v-for="category in expenseBudgetInfo.categories">
+        <div class="col-sm">
+          <p class="text-center">{{ category.categoryName }}</p>
+        </div>
 
-    </table>
+        <div class="col-sm">
+          <div class="row">&nbsp;</div>
+
+          <div class="row" v-for="subcategory in category.subcategories">
+            {{ subcategory.subcategoryName }}
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="row">{{ category.categoryBudgetedSum }}</div>
+
+          <div class="row" v-for="subcategory in category.subcategories">
+            <input class="form-control form-control-sm" width="1" v-model="subcategory.subcategoryBudgetedSum">
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="row">{{ category.categorySum }}</div>
+
+          <div class="row" v-for="subcategory in category.subcategories">
+            {{ subcategory.subcategorySum }}
+          </div>
+        </div>
+
+        <!--   jääk     -->
+        <div class="col-sm">
+          <div class="row">{{ category.categoryBudgetedSum - category.categorySum }}</div>
+
+          <div class="row" v-for="subcategory in category.subcategories">
+            {{ subcategory.subcategoryBudgetedSum - subcategory.subcategorySum }}
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm">
+          <p class="text-center">Kokku</p>
+        </div>
+
+        <div class="col-sm">
+          <div class="row">&nbsp;</div>
+        </div>
+
+        <div class="col-sm">
+          <div class="row">{{ expenseBudgetInfo.totalBudgetedSum }}</div>
+        </div>
+
+        <div class="col-sm">
+          <div class="row">{{ expenseBudgetInfo.totalSum }}</div>
+        </div>
+
+        <div class="col-sm">
+          <div class="row"> {{ expenseBudgetInfo.totalBudgetedSum - expenseBudgetInfo.totalSum }};</div>
+        </div>
+
+      </div>
 
 
-    <br><br>
-
-
+    </div>
 
 
   </div>
 
 
 </template>
-
 
 
 <script>
@@ -64,40 +119,44 @@ export default {
       userId: sessionStorage.getItem('userId'),
       newSubcategoryName: '',
       subcategoryId: 0,
-      expenseCategories: [
-        {
-          categoryId: 0,
-          categoryName: "",
-          categoryBudgetedSum: Number,
-          categorySum: Number,
-          subcategories: [
-            {
-              categoryId: 0,
-              subcategoryId: 0,
-              subcategoryName: "",
-              subcategoryBudgetedSum: Number,
-              subcategorySum: Number,
-              isActive: true
-            }
-          ]
-        }
-      ],
-      divUpdateSubcategoryName: true,
-      divAddSubcategory: true,
-      displayAddSubcategoryComponent: true,
-      displayNewExpenseComponent: false
+      expenseBudgetInfo: {
+        categories: [
+          {
+            categoryId: 0,
+            categoryName: '',
+            categoryBudgetedSum: 0,
+            categorySum: 0,
+            subcategories: [
+              {
+                categoryId: 0,
+                subcategoryId: 0,
+                subcategoryName: '',
+                subcategoryBudgetedSum: 0,
+                subcategorySum: 0,
+                isActive: false
+              }
+            ]
+          }
+        ],
+        totalBudgetedSum: 0,
+        totalSum: 0
+      },
+
     }
+
   },
   methods: {
-    findExpenseCategories: function () {
+    findExpenseBudgetInfo: function () {
       this.divUpdateSubcategoryName = false
-      this.$http.get("/setup/categories/expense", {
+      this.$http.get("/report/budget/expense", {
             params: {
+              year: 2022,
+              month: 8,
               userId: this.userId
             }
           }
       ).then(response => {
-        this.expenseCategories = response.data.categories
+        this.expenseBudgetInfo = response.data
         console.log("expense kategooriad", response.data)
       }).catch(error => {
         console.log(error)
@@ -105,27 +164,29 @@ export default {
     },
 
 
-
   },
   mounted() {
-    this.findExpenseCategories()
+    this.findExpenseBudgetInfo()
   }
 
 }
 </script>
 
 <style scoped>
-/*#expense {*/
-/*  background-color: aliceblue;*/
-/*  color: #390A7A;*/
-/*}*/
-/*#mainCategory {*/
-/*  border: 2px ;*/
-/*  padding: 5px;*/
-/*}*/
-/*#subcategiry {*/
-/*  border: 2px ;*/
-/*  padding: 2px;*/
-/*}*/
+
+
+#expense {
+  background-color: aliceblue;
+  color: #390A7A;
+  font-size: large;
+}
+#mainCategory {
+  border: 2px ;
+  padding: 5px;
+}
+#subcategiry {
+  border: 2px ;
+  padding: 2px;
+}
 
 </style>

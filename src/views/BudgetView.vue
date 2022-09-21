@@ -2,9 +2,12 @@
   <div>
 
     <h1> Minu eelarve</h1><br>
+    <h2> Tulud </h2>
     <div id="setupIncome">
       <SetupIncomeWithData title='Tulukategooria'/>
     </div>
+    <br><br>
+    <h2> Kulud </h2>
 
     <div id="setupExpense">
       <SetupExpenseWithData title='Kulukategooria'/>
