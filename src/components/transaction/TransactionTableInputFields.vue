@@ -20,37 +20,22 @@
     <td><input type="number" placeholder="Väljaminek"/></td>
     <td><input type="number" placeholder="Sissetulek"/></td>
     <td>
-      <button type="submit" style="margin: 5px" class="btn btn-light" v-on:click="addTransaction">Lisa</button>
+      <button type="submit" style="margin: 5px" class="btn btn-light" v-on:click="transactionInfoAdd">Lisa</button>
     </td>
   </tr>
 </template>
 <script>
 export default {
   name: 'TransactionTableInputFields',
-  props: {},
+  props: {
+    userId:''
+  },
   data: function () {
     return {
       userId: sessionStorage.getItem('userId'),
       selectedAccountId: '',
       selectedSubcategoryId:'',
 
-      addTransactionInfo:
-          [
-            {
-              transactionId: 0,
-              userId: 0,
-              senderAccountId: 0,
-              senderAccountName: '',
-              receiverAccountId: 0,
-              date: '',
-              subcategoryId: 0,
-              subcategoryName: '',
-              description: '',
-              amount: 0,
-              type: '',
-              isActive: true
-            }
-          ],
       accountInfos:
           [
             {
@@ -71,23 +56,27 @@ export default {
               isActive: true
             }
           ],
+      transactionInfoAdd:
+          [
+            {
+              transactionId: 0,
+              userId: 0,
+              senderAccountId: 0,
+              senderAccountName: '',
+              receiverAccountId: 0,
+              date: '',
+              subcategoryId: 0,
+              subcategoryName: '',
+              description: '',
+              amount: 0,
+              type: '',
+              isActive: true
+            }
+          ],
     }
   },
   methods: {
-    addTransaction: function () {
-      // todo Loo data osasse uus objekt add transactionInfo
-      //  täida see transactionInfo objekt infoga
-      //  osa infost saad täidetud v-model abil kastidest ja rippmenüüde selected id-dest
 
-
-      this.$http.post("/budget/transaction/add", this.addTransactionInfo
-      ).then(response => {
-
-        console.log(response.data)
-      }).catch(error => {
-        console.log(error)
-      })
-    },
     getAccountInfos: function () {
       this.$http.get("/budget/account/all", {
             params: {
@@ -109,6 +98,30 @@ export default {
           }
       ).then(response => {
         this.subcategoryInfosAdd = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    transactionInfoAdd: function () {
+      // todo Loo data osasse uus objekt add transactionInfo
+      //  täida see transactionInfo objekt infoga
+      //  osa infost saad täidetud v-model abil kastidest ja rippmenüüde selected id-dest
+
+      this.transactionInfoAdd.transactionId = 1
+      this.transactionInfoAdd.userId = this.userId
+      this.transactionInfoAdd.senderAccountId = this.selectedAccountId
+      this.transactionInfoAdd.senderAccountName = this.accountName
+      this.transactionInfoAdd.receiverAccountId = this.receiverAccountId
+      this.transactionInfoAdd.date = this.date
+      this.transactionInfoAdd.subcategoryId = this.selectedSubcategoryId
+      this.transactionInfoAdd.subcategoryName = this.subcategoryName
+      this.transactionInfoAdd.description = this.description
+      this.transactionInfoAdd.amount = this.amount
+      this.transactionInfoAdd.type = this.type
+
+      this.$http.post("/budget/transaction/add", this.transactionInfoAdd
+      ).then(response => {
+        this.transactionInfoAdd= response.data
       }).catch(error => {
         console.log(error)
       })
