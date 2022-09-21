@@ -7,6 +7,8 @@
             <tr>
                 <th scope="col">Minu kontod</th>
                 <th scope="col"></th>
+                <th scope="col">Kontojääk</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -15,6 +17,8 @@
 
             <tr v-for="account in accountInfos">
                 <td>{{ account.accountName }}</td>
+                <td></td>
+                <td>{{ account.balance }}</td>
                 <td>
                     <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="editAccountName(account)">
                         Muuda
@@ -40,12 +44,15 @@
         <br>
 
 
-            <button type="submit" class="btn btn-outline-dark btn-sm"
-                    v-on:click="addNewAccount">Lisa
-            </button>
+        <button type="submit" class="btn btn-outline-dark btn-sm"
+                v-on:click="addNewAccount">Lisa
+        </button>
 
         <div v-if="displayAddNewAccountComponent">
-            <AddAccount @successfulAddedNewAccountEvent="refreshAccounts"/>
+            <AddAccount :user-id="userId"
+                        :name="name"
+
+                @successfulAddedNewAccountEvent="refreshAccounts"/>
         </div>
 
     </div>
@@ -53,6 +60,7 @@
 
 <script>
 import AddAccount from "@/components/account/AddAccount";
+
 export default {
     name: "AccountView",
     components: {AddAccount},
@@ -63,12 +71,19 @@ export default {
             accountId: 0,
             accountInfos: [
                 {
-                    id: 0,
+                    accountId: 0,
                     accountName: '',
                     balance: 0,
                     isActive: true
                 }
             ],
+            accountRequest: {
+                userId: 0,
+                accountTypeId: 0,
+                name: '',
+                description: '',
+                balance: 0
+            },
 
             divUpdateAccountName: false,
             displayAddNewAccountComponent: false
@@ -92,15 +107,15 @@ export default {
         },
         editAccountName: function (account) {
             this.divUpdateAccountName = true
-            this.accountId = account.id
+            this.accountId = account.accountId
             this.newAccountName = account.accountName
 
         },
         updateAccountName: function () {
             this.$http.patch("/budget/account/update", null, {
                     params: {
-                        accountId: this.id,
-                        accountName: this.accountName
+                        accountId: this.accountId,
+                        accountName: this.newAccountName
                     }
                 }
             ).then(response => {
@@ -120,7 +135,7 @@ export default {
         deactivateAccountName: function (account) {
             this.$http.patch("/budget/account/status", null, {
                     params: {
-                        AccountId: account.accountId,
+                        accountId: account.accountId,
                         isActive: false
                     }
                 }
