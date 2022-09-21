@@ -1,6 +1,14 @@
 <template>
 
 
+  <!--<TODO>-->
+  <!--  Teha Eelarve TotalSum osad ka reaktiivseks-->
+  <!--  Lisada Kuuu ja aasta valik-->
+  <!--  Lisada Salvesta nupp, mis salvestab Eelarve summad databaasi-->
+  <!--</TODO>-->
+
+
+
   <div id="expense">
 
     <div class="container">
