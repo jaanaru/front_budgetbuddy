@@ -12,9 +12,15 @@
     </td>
 
     <td>
-      <select type="selected"> v-model="selected"
+      <select type="selected" v-model="selectedSubcategoryId">
       <option disabled value="">Vali kategooria</option>
-    </select></td>
+        <option v-for="subcategoryInfoAdd in subcategoryInfosAdd" :value="subcategoryInfoAdd.subcategoryId">{{
+            subcategoryInfoAdd.subcategoryName}}
+          </option>
+    </select>
+    </td>
+
+
     <td><input type="text" class="form-control" placeholder="Memo"></td>
     <td><input type="number" placeholder="Väljaminek"/></td>
     <td><input type="number" placeholder="Sissetulek"/></td>
@@ -31,7 +37,9 @@ export default {
     return {
       userId: sessionStorage.getItem('userId'),
       selectedAccountId: '',
-      transactionInfos:
+      selectedSubcategoryId:'',
+
+      addTransactionInfo:
           [
             {
               transactionId: 0,
@@ -57,42 +65,15 @@ export default {
               isActive: true
             }
           ],
-      budgetInfosIncome:
+      subcategoryInfosAdd:
           [
             {
               categoryId: 0,
-              categoryName: '',
-              categoryBudgetedSum: 0,
-              categorySum: 0,
-              subcategories: [
-                {
-                  categoryId: 0,
-                  subcategoryId: 0,
-                  subcategoryName: '',
-                  subcategoryBudgetedSum: 0,
-                  subcategorySum: 0,
-                  isActive: true
-                }
-              ]
-            }
-          ],
-      budgetInfosExpense:
-          [
-            {
-              categoryId: 0,
-              categoryName: '',
-              categoryBudgetedSum: 0,
-              categorySum: 0,
-              subcategories: [
-                {
-                  categoryId: 0,
-                  subcategoryId: 0,
-                  subcategoryName: '',
-                  subcategoryBudgetedSum: 0,
-                  subcategorySum: 0,
-                  isActive: true
-                }
-              ]
+              subcategoryId: 0,
+              subcategoryName:'',
+              subcategoryBudgetedSum: 0,
+              subcategorySum: 0,
+              isActive: true
             }
           ],
     }
@@ -125,26 +106,14 @@ export default {
         console.log(error)
       })
     },
-    getBudgetInfosIncome: function () {
-      this.$http.get("/setup/categories/income)", {
+    getSubcategoryInfosAdd: function () {
+      this.$http.get("/setup/subcategories/all", {
             params: {
               userId: this.userId
             }
           }
       ).then(response => {
-        this.budgetInfosIncome = response.data
-      }).catch(error => {
-        console.log(error)
-      })
-    },
-    getBudgetInfosExpense: function () {
-      this.$http.get("/setup/categories/expense", {
-            params: {
-              userId: this.userId
-            }
-          }
-      ).then(response => {
-        this.budgetInfosExpense = response.data
+        this.subcategoryInfosAdd = response.data
       }).catch(error => {
         console.log(error)
       })
@@ -152,6 +121,7 @@ export default {
   },
   mounted() {
     this.getAccountInfos()
+    this.getSubcategoryInfosAdd()
   }
 }
 </script>
