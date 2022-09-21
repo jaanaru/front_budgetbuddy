@@ -16,7 +16,12 @@ export default {
 </script>
 
 
-<style >
+<style scoped>
+body {background-size: 1200px 1200px;
+    color: deepskyblue;}
+
+
+background-size: 300px 100px;
 #mainCategory {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

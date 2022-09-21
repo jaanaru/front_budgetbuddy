@@ -1,7 +1,7 @@
 <template>
 
 
-    <div>
+    <div id="accountView">
         <table class="table-hover" id="table">
             <thead>
             <tr>
@@ -43,14 +43,18 @@
         </div>
         <br>
 
+<div v-if="divAddNewAccount">
+    <button type="submit" class="btn btn-outline-dark btn-sm"
+            v-on:click="addNewAccount">Lisa uus konto
+    </button>
+    <br>
+</div>
 
-        <button type="submit" class="btn btn-outline-dark btn-sm"
-                v-on:click="addNewAccount">Lisa
-        </button>
 
         <div v-if="displayAddNewAccountComponent">
             <AddAccount :user-id="userId"
                         :name="name"
+                        :lisa-nupp="divAddNewAccount"
 
                 @successfulAddedNewAccountEvent="refreshAccounts"/>
         </div>
@@ -86,7 +90,8 @@ export default {
             },
 
             divUpdateAccountName: false,
-            displayAddNewAccountComponent: false
+            displayAddNewAccountComponent: false,
+            divAddNewAccount: true
 
         }
 
@@ -119,6 +124,7 @@ export default {
                     }
                 }
             ).then(response => {
+                this.divUpdateAccountName = false
                 this.findAccounts()
                 console.log(response.data)
             }).catch(error => {
@@ -160,7 +166,5 @@ export default {
 </script>
 
 <style scoped>
-#table {
-    align-content: center;
-}
+
 </style>
