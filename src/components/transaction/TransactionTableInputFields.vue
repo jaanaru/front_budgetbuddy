@@ -80,7 +80,7 @@ export default {
       //  osa infost saad täidetud v-model abil kastidest ja rippmenüüde selected id-dest
 
 
-      this.$http.post("/budget/transaction/add", this.transactionInfo
+      this.$http.post("/budget/transaction/add", this.addTransactionInfo
       ).then(response => {
 
         console.log(response.data)
