@@ -2,44 +2,68 @@
 
 
     <div>
-        <table class="table-hover">
-          <thead>
-          <tr>
-              <th scope="col">Minu kontod</th>
-          </tr>
-          </thead>
+        <table class="table-hover" id="table">
+            <thead>
+            <tr>
+                <th scope="col">Minu kontod</th>
+                <th scope="col"></th>
+                <th scope="col">Kontojääk</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
 
             <tbody>
-            <div>
-
 
             <tr v-for="account in accountInfos">
-                <td>{{account.accountName}}
-                    <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="editAccountName">Muuda</button>
-                    <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="deactivateAccountName">Kustuta</button></td>
+                <td>{{ account.accountName }}</td>
+                <td></td>
+                <td>{{ account.balance }}</td>
+                <td>
+                    <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="editAccountName(account)">
+                        Muuda
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-outline-dark btn-sm"
+                            v-on:click="deactivateAccountName(account)">Kustuta
+                    </button>
+                </td>
             </tr>
 
-            </div>
-            <button type="submit" class="btn btn-outline-dark btn-sm"
-                    v-on:click="addNewAccount(subcategory)">Lisa
-            </button>
             </tbody>
 
         </table>
+
         <br>
         <div v-if="divUpdateAccountName">
-            <input type="text" v-model="newAccountName">
+            <input type="text" v-model="newAccountName" placeholder='Uus nimi'>
             <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="updateAccountName">Salvesta
             </button>
         </div>
         <br>
 
+
+        <button type="submit" class="btn btn-outline-dark btn-sm"
+                v-on:click="addNewAccount">Lisa
+        </button>
+
+        <div v-if="displayAddNewAccountComponent">
+            <AddAccount :user-id="userId"
+                        :name="name"
+
+                @successfulAddedNewAccountEvent="refreshAccounts"/>
+        </div>
+
     </div>
 </template>
 
 <script>
+import AddAccount from "@/components/account/AddAccount";
+
 export default {
     name: "AccountView",
+    components: {AddAccount},
     data: function () {
         return {
             userId: sessionStorage.getItem('userId'),
@@ -47,35 +71,43 @@ export default {
             accountId: 0,
             accountInfos: [
                 {
-                    id: 0,
+                    accountId: 0,
                     accountName: '',
                     balance: 0,
                     isActive: true
                 }
             ],
+            accountRequest: {
+                userId: 0,
+                accountTypeId: 0,
+                name: '',
+                description: '',
+                balance: 0
+            },
 
             divUpdateAccountName: false,
+            displayAddNewAccountComponent: false
 
         }
 
     },
     methods: {
         findAccounts: function () {
-                this.$http.get("/budget/account/all", {
-                        params: {
-                            userId: this.userId
-                        }
+            this.$http.get("/budget/account/all", {
+                    params: {
+                        userId: this.userId
                     }
-                ).then(response => {
-                    this.accountInfos = response.data
-                    console.log("kontod", response.data)
-                }).catch(error => {
-                    console.log(error)
-                })
-            },
-        editAccountName: function(account) {
+                }
+            ).then(response => {
+                this.accountInfos = response.data
+                console.log("kontod", response.data)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        editAccountName: function (account) {
             this.divUpdateAccountName = true
-            this.id = account.id
+            this.accountId = account.accountId
             this.newAccountName = account.accountName
 
         },
@@ -83,7 +115,7 @@ export default {
             this.$http.patch("/budget/account/update", null, {
                     params: {
                         accountId: this.accountId,
-                        accountName: this.accountName
+                        accountName: this.newAccountName
                     }
                 }
             ).then(response => {
@@ -93,23 +125,42 @@ export default {
                 console.log(error)
             })
         },
-
-
-
-
-
-
-
+        addNewAccount: function () {
+            this.displayAddNewAccountComponent = true
         },
+        refreshAccounts: function () {
+            this.findAccounts()
+            this.displayAddNewAccountComponent = false
+        },
+        deactivateAccountName: function (account) {
+            this.$http.patch("/budget/account/status", null, {
+                    params: {
+                        accountId: account.accountId,
+                        isActive: false
+                    }
+                }
+            ).then(response => {
+                this.findAccounts()
+                console.log(response.data)
+            }).catch(error => {
+                console.log(error)
+            })
 
 
-        mounted() {
-        this.findAccounts()
+            this.accountInfos.isActive = false
         }
+
+    },
+
+    mounted() {
+        this.findAccounts()
+    }
 }
 
 </script>
 
 <style scoped>
-
+#table {
+    align-content: center;
+}
 </style>

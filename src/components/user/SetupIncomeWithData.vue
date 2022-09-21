@@ -1,44 +1,105 @@
 <template>
 
+
   <div id="income">
-    <h2> {{ title }}</h2>
 
-    <table class="table table-hover table-light">
-      <thead>
-      <tr>
-        <th scope="col">Kategooria</th>
-        <th scope="col">Subkategooria</th>
-        <th scope="col">Eelarve</th>
-        <th scope="col">Tegelik</th>
-        <th scope="col">Jääk</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <div v-for="category in incomeCategories" id="mainCategory">
-
-        <tr>
-          <td>{{ category.categoryName }}</td>
-          <td></td>
-          <td>{{ category.categoryBudgetedSum }}</td>
-          <td>{{ category.categorySum }}</td>
-          <td>200.00</td>
-        </tr>
-
-        <div v-for="subcategory in category.subcategories" id="subcategory">
-          <tr>
-            <td></td>
-            <td>{{ subcategory.subcategoryName }}</td>
-            <td>{{ subcategory.subcategoryBudgetedSum }}</td>
-            <td>{{ subcategory.subcategorySum }}</td>
-            <td>50.00</td>
-          </tr>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <p class="text-center">Kategooria</p>
+        </div>
+        <div class="col-sm">
+          <p class="text-center">Subkategooria</p>
+        </div>
+        <div class="col-sm">
+          <p class="text-center">Eelarve</p>
+        </div>
+        <div class="col-sm">
+          <p class="text-center">Tegelik</p>
+        </div>
+        <div class="col-sm">
+          <p class="text-center">Jääk</p>
+        </div>
+      </div>
+      <div class="row" v-for="category in incomeBudgetInfo.categories">
+        <div class="col-sm">
+          <p class="text-left">{{ category.categoryName }}</p>
         </div>
 
+        <div class="col-sm">
+          <div class="row">&nbsp;</div>
+
+          <div class="row" v-for="subcategory in category.subcategories">
+            <p class="text-center">{{ subcategory.subcategoryName }}</p>
+
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="row">
+            <p class="text-center">{{ category.categoryBudgetedSum }}</p>
+            </div>
+
+          <div class="row" v-for="subcategory in category.subcategories">
+            <input input class="form-control form-control-sm" v-model="subcategory.subcategoryBudgetedSum">
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="row">
+            <p class="text-center">{{ category.categorySum }}</p>
+            </div>
+          <div class="row" v-for="subcategory in category.subcategories">
+            <p class="text-center">{{ subcategory.subcategorySum }}</p>
+          </div>
+        </div>
+
+        <!--   jääk     -->
+        <div class="col-sm">
+          <div class="row">
+            <p class="text-center">{{ category.categoryBudgetedSum - category.categorySum }}</p>
+          </div>
+
+          <div class="row" v-for="subcategory in category.subcategories">
+            <p class="text-center">{{ subcategory.subcategoryBudgetedSum - subcategory.subcategorySum }}</p>
+
+          </div>
+        </div>
 
       </div>
-      </tbody>
-    </table>
+
+      <div class="row">
+
+        <div class="col-sm">
+          <p class="text-left">Kokku</p>
+        </div>
+
+        <div class="col-sm">
+          <div class="row">&nbsp;</div>
+        </div>
+
+        <div class="col-sm">
+          <div class="row">
+            <p class="text-center">{{ incomeBudgetInfo.totalBudgetedSum }}</p>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="row">
+            <p class="text-center">{{ incomeBudgetInfo.totalSum }}</p>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="row">
+            <p class="text-center">{{ incomeBudgetInfo.totalBudgetedSum - incomeBudgetInfo.totalSum }}</p>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
 
 
   </div>
@@ -61,42 +122,44 @@ export default {
       userId: sessionStorage.getItem('userId'),
       newSubcategoryName: '',
       subcategoryId: 0,
-      incomeCategories: [
-        {
-          categoryId: 0,
-          categoryName: "",
-          categoryBudgetedSum: Number,
-          categorySum: Number,
-          subcategories: [
-            {
-              categoryId: 0,
-              subcategoryId: 0,
-              subcategoryName: "",
-              subcategoryBudgetedSum: Number,
-              subcategorySum: Number,
-              isActive: true
-            }
-          ]
-        }
-      ],
-      divUpdateSubcategoryName: true,
-      divAddSubcategory: true,
-      displayAddSubcategoryComponent: true,
-      displayNewIncomeComponent: false,
+      incomeBudgetInfo: {
+        categories: [
+          {
+            categoryId: 0,
+            categoryName: '',
+            categoryBudgetedSum: 0,
+            categorySum: 0,
+            subcategories: [
+              {
+                categoryId: 0,
+                subcategoryId: 0,
+                subcategoryName: '',
+                subcategoryBudgetedSum: 0,
+                subcategorySum: 0,
+                isActive: false
+              }
+            ]
+          }
+        ],
+        totalBudgetedSum: 0,
+        totalSum: 0
+      }
+      ,
 
     }
 
   },
   methods: {
-    findIncomeCategories: function () {
-      this.divUpdateSubcategoryName = false
-      this.$http.get("/setup/categories/income", {
+    findIncomeBudgetInfo: function () {
+      this.$http.get("/report/budget/income", {
             params: {
+              year: 2022,
+              month: 8,
               userId: this.userId
             }
           }
       ).then(response => {
-        this.incomeCategories = response.data.categories
+        this.incomeBudgetInfo = response.data
         console.log("income kategooriad", response.data)
       }).catch(error => {
         console.log(error)
@@ -106,7 +169,7 @@ export default {
   },
 
   mounted() {
-    this.findIncomeCategories()
+    this.findIncomeBudgetInfo()
   }
 }
 </script>
