@@ -1,8 +1,6 @@
 <template>
   <tr>
     <td><input type="date" aria-label="Kuupäev" class="form-control"></td>
-
-
     <td><select type="selected" v-model="selectedAccountId">
         <option disabled value="">Vali konto</option>
         <option v-for="accountInfo in accountInfos" :value="accountInfo.accountId">
@@ -10,7 +8,6 @@
         </option>
       </select>
     </td>
-
     <td>
       <select type="selected" v-model="selectedSubcategoryId">
       <option disabled value="">Vali kategooria</option>
@@ -19,8 +16,6 @@
           </option>
     </select>
     </td>
-
-
     <td><input type="text" class="form-control" placeholder="Memo"></td>
     <td><input type="number" placeholder="Väljaminek"/></td>
     <td><input type="number" placeholder="Sissetulek"/></td>
