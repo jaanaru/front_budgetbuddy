@@ -12,6 +12,13 @@
 </template>
 
 <style>
+body, html {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: aliceblue;
+}
 body {
     background-color: aliceblue;
     background-size: 1200px 900px;
@@ -22,8 +29,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: 	#390A7A;
-
-
 }
 
 nav {

@@ -16,17 +16,14 @@
                 <label for="balance">Konto jääk</label>
                 <input type="text" id="balance" v-model="accountRequest.balance">
             </div>
-            <div>
-                <label for="accountTypeId">Konto tüüp</label>
 
-            </div>
 
 
         </form>
 
 
         <button type="button" style="margin: 5px" class="btn btn-outline-dark btn-sm" v-on:click="addAccount">
-            Lisa
+            Salvesta
         </button>
 
     </div>
@@ -39,7 +36,8 @@ export default {
     name: "AddAccount",
     props: {
         userId: '',
-        name: ''
+        name: '',
+        divAddNewAccount: false
     },
     data: function () {
         return {
@@ -48,7 +46,7 @@ export default {
                 accountTypeId: 0,
                 name: '',
                 description: '',
-                balance: 0
+                balance: ''
             }
         }
     },
@@ -77,5 +75,10 @@ export default {
 </script>
 
 <style scoped>
-
+label{
+    width: 240px;
+    display: inline-block;
+    text-align: right;
+    margin-right: 15px;
+}
 </style>
