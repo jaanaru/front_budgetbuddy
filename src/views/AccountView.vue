@@ -59,6 +59,18 @@
 
                 @successfulAddedNewAccountEvent="refreshAccounts"/>
         </div>
+      <br>
+      <br>
+      <br>
+
+      <div>
+        <table class="table table-hover table-light">
+          <TransactionTableHeader/>
+          <TransactionTableBody/>
+        </table>
+      </div>
+
+
 
     </div>
 </template>
@@ -66,9 +78,16 @@
 <script>
 import AddAccount from "@/components/account/AddAccount";
 
+import TransactionTableHeader from "@/components/transaction/TransactionTableHeader";
+import TransactionTableInputFields from "@/components/transaction/TransactionTableInputFields";
+import TransactionTableBody from "@/components/transaction/TransactionTableBody";
+
+
 export default {
     name: "AccountView",
-    components: {AddAccount},
+    components: {AddAccount,TransactionTableBody, TransactionTableInputFields, TransactionTableHeader},
+
+
     data: function () {
         return {
             userId: sessionStorage.getItem('userId'),

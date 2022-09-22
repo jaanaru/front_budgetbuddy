@@ -40,7 +40,7 @@
           </div>
 
           <div class="row" v-for="subcategory in category.subcategories">
-            <input input class="form-control form-control-sm" v-model="subcategory.subcategoryBudgetedSum">
+            <input  class="form-control" width="1" v-model="subcategory.subcategoryBudgetedSum">
           </div>
         </div>
 
@@ -101,7 +101,7 @@
 
     </div>
 
-    <button type="button" style="margin: 5px" class="btn btn-outline-dark btn-sm"
+    <button type="button" style="margin: 5px" class="btn btn-dark"
             v-on:click="updatePlanningInfosInDatabase">
       Salvesta tulud
     </button>
@@ -204,5 +204,24 @@ export default {
   }
 }
 </script>
+<style scoped>
 
+
+#income {
+  background-color: aliceblue;
+  color: #390A7A;
+  font-size: 1.1em
+}
+
+#mainCategory {
+  border: 2px;
+  padding: 5px;
+}
+
+#subcategory {
+  border: 2px;
+  padding: 2px;
+}
+
+</style>
 

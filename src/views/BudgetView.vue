@@ -50,7 +50,7 @@
 
         </div>
         <br><br>
-        <button type="button" style="margin: 5px" class="btn btn-dark">Salvesta eelarve</button>
+<!--        <button type="button" style="margin: 5px" class="btn btn-dark">Salvesta eelarve</button>-->
     </div>
 </template>
 
