@@ -9,6 +9,17 @@
         </option>
       </select>
     </td>
+
+    <td>
+      <select type="selected" v-model="transactionInfoAdd.receiverAccountId">
+        <option disabled value="">Vali konto</option>
+        <option value="">Välja</option>
+        <option v-for="accountInfo in accountInfos" :value="accountInfo.accountId">
+          {{accountInfo.accountName }}
+        </option>
+      </select>
+    </td>
+
     <td>
       <select type="selected" v-model="transactionInfoAdd.subcategoryId">
       <option disabled value="">Vali kategooria</option>

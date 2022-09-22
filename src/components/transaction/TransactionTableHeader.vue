@@ -2,7 +2,8 @@
   <thead>
   <tr>
     <th scope="col">Kuupäev</th>
-    <th scope="col">Konto</th>
+    <th scope="col">Maksja konto</th>
+    <th scope="col">Saaja konto</th>
     <th scope="col">Kategooria</th>
     <th scope="col">Kommentaar</th>
     <th scope="col">Kulu/Tulu</th>

@@ -4,6 +4,7 @@
   <tr v-for="transaction in transactionInfos">
     <td>{{ transaction.date }}</td>
     <td>{{ transaction.senderAccountName }}</td>
+    <td>{{ transaction.receiverAccountName }}</td>
     <td>{{ transaction.subcategoryName }}</td>
     <td>{{ transaction.description }}</td>
 
@@ -36,6 +37,7 @@ export default {
               senderAccountId: 0,
               senderAccountName: '',
               receiverAccountId: 0,
+              receiverAccountName: '',
               date: '',
               subcategoryId: 0,
               subcategoryName: '',
