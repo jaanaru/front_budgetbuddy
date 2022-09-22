@@ -1,6 +1,6 @@
 <template>
   <tbody>
-  <TransactionTableInputFields/>
+  <TransactionTableInputFields @eventAddTransactionSuccess="findTransactionsByAccountId"/>
   <tr v-for="transaction in transactionInfos">
     <td>{{ transaction.date }}</td>
     <td>{{ transaction.senderAccountName }}</td>
