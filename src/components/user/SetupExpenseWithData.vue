@@ -112,10 +112,14 @@ export default {
   components: {AddSubcategory, AddExpenseCategory},
   props: {
     title: String,
+      month: '',
+      year: ''
   },
 
   data() {
     return {
+        // month: sessionStorage.getItem('monthName'),
+        // year: sessionStorage.getItem('yearName'),
       userId: sessionStorage.getItem('userId'),
       newSubcategoryName: '',
       subcategoryId: 0,
@@ -184,7 +188,7 @@ export default {
   border: 2px ;
   padding: 5px;
 }
-#subcategiry {
+#subcategory {
   border: 2px ;
   padding: 2px;
 }

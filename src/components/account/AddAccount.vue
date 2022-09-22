@@ -2,7 +2,7 @@
 
     <div>
 
-        <form>
+        <form id="newAccount">
 
             <div>
                 <label for="name">Konto nimi</label>
@@ -75,10 +75,23 @@ export default {
 </script>
 
 <style scoped>
+#newAccount {
+    padding-top: 50px;
+    padding-bottom: 20px;
+text-align: center;
+}
 label{
-    width: 240px;
+    width: 80px;
+    height: 40px;
     display: inline-block;
     text-align: right;
-    margin-right: 15px;
+    margin-right: 20px;
+}
+input {
+    width: 180px;
+    height: 28px;
+    display: inline-block;
+    text-align: right;
+
 }
 </style>

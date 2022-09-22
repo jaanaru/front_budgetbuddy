@@ -1,8 +1,8 @@
 <template>
   <div>
       <div id="month">
-          <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="select">
-              <option selected>Vali kuu</option>
+          <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="select" v-model="month.name">
+              <option>Vali kuu</option>
               <option value="1">Jaanuar</option>
               <option value="2">Veebruar</option>
               <option value="3">Märts</option>
@@ -18,20 +18,20 @@
           </select>
       </div>
       <div id="year">
-      <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="select">
-              <option selected>Vali aasta</option>
-              <option value="1">2016</option>
-              <option value="2">2017</option>
-              <option value="3">2018</option>
-              <option value="4">2019</option>
-              <option value="5">2020</option>
-              <option value="6">2021</option>
-              <option value="7">2022</option>
-              <option value="8">2023</option>
-              <option value="9">2024</option>
-              <option value="10">2025</option>
+      <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="select" v-model="year.name">
+              <option>Vali aasta</option>
+              <option value="1">2020</option>
+              <option value="2">2021</option>
+              <option value="3">2022</option>
+              <option value="4">2023</option>
+              <option value="5">2024</option>
+              <option value="6">2025</option>
           </select>
       </div>
+
+<!--      <button type="button" style="margin: 5px" class="btn btn-outline-dark btn-sm" v-on:click="saveMonthBudget">-->
+<!--          Vali-->
+<!--      </button>-->
 
 
     <h1> Minu eelarve</h1><br>
@@ -63,10 +63,20 @@ export default {
   components: {SetupIncomeWithData, SetupExpenseWithData},
   data() {
     return {
+        month: {monthName: ''},
+        year: {yearName: ''},
+        // displaySetupIncome: false,
+        // displaySetupExpense: false
     }
   },
 
   methods: {
+      // saveMonthBudget: function () {
+      //     sessionStorage.setItem('month', this.month.monthName)
+      //     sessionStorage.setItem('year', this.year.yearName)
+      //     // this.displaySetupIncome = true
+      //     // this.displaySetupExpense = true
+      // }
       },
 
   mounted() {
