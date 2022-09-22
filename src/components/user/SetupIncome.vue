@@ -12,17 +12,17 @@
         <div v-for="subcategory in category.subcategories" id="subcategory" >
           {{ subcategory.subcategoryName }}
 
-          <button type="submit" class="btn btn-outline-dark btn-sm"
+          <button type="submit" class="btn btn-outline-secondary btn-sm"
                   v-on:click="editSubcategoryName(subcategory)">Muuda
           </button>
 
-          <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="deactivateSubcategory(subcategory)">kustuta</button>
+          <button type="submit" class="btn btn-outline-secondary btn-sm" v-on:click="deactivateSubcategory(subcategory)">kustuta</button>
 
 
         </div>
 
         <div>
-          <button type="submit" class="btn btn-outline-dark btn-sm" id="addSubcategory"
+          <button type="submit" class="btn btn-outline-secondary btn-sm" id="addSubcategory"
                   v-on:click="addNewSubcategory">Lisa uus alamkategooria
           </button>
           <div v-if="displayAddSubcategoryComponent">
@@ -41,14 +41,14 @@
     <br><br>
     <div v-if="divUpdateSubcategoryName">
       <input type="text" v-model="newSubcategoryName">
-      <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="updateSubcategoryName">Salvesta
+      <button type="submit" class="btn btn-outline-secondary btn-sm" v-on:click="updateSubcategoryName">Salvesta
       </button>
     </div>
     <br>
 
 
     <div>
-      <button type="submit" class="btn btn-outline-dark btn-lg" v-on:click="addNewIncomeCategory">Lisa uus peakategooria
+      <button type="submit" class="btn btn-outline-secondary btn-lg" v-on:click="addNewIncomeCategory">Lisa uus peakategooria
       </button>
       <div v-if="displayNewIncomeComponent">
 

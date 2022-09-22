@@ -3,7 +3,7 @@
 
         <input type="text" placeholder="" v-model="incomeCategoryName">
 
-        <button type="button" style="margin: 5px" class="btn btn-outline-dark btn-sm" v-on:click="addIncomeCategory">
+        <button type="button" style="margin: 5px" class="btn btn-outline-secondary btn-sm" v-on:click="addIncomeCategory">
             Lisa
         </button>
 

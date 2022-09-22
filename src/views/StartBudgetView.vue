@@ -10,7 +10,7 @@
         </div>
         <br><br> <br> <br>
 
-        <button>SALVESTA EELARVE</button>
+        <button type="button" class="btn btn-secondary" id="saveBudget">Salvesta eelarve</button>
     </div>
 </template>
 
@@ -52,6 +52,10 @@ export default {
 #setupExpense {
     width: 50%;
     float: right;
+}
+#saveBudget{
+    margin-top: 1270px;
+    margin-left: 550px;
 }
 
 nav {

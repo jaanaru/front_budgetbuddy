@@ -6,7 +6,7 @@
             <AlertError :errorMessage="errorMessage"/>
             <input type="text" style="margin: 5px" placeholder="kasutajanimi" v-model="loginRequest.username"><br>
             <input type="password" style="margin: 5px" placeholder="parool" v-model="loginRequest.password"><br>
-            <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="logIn">Logi sisse</button>
+            <button type="button" style="margin: 5px" class="btn btn-secondary" v-on:click="logIn">Logi sisse</button>
             <br>
             <router-link to="/register" id="link">Registreeri uus kasutaja</router-link>
         </div>

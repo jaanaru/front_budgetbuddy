@@ -2,7 +2,7 @@
 <div>
     <input type="text" placeholder="" v-model="expenseCategoryName">
 
-    <button type="button" style="margin: 5px" class="btn btn-outline-dark btn-sm" v-on:click="addExpenseCategory">
+    <button type="button" style="margin: 5px" class="btn btn-outline-secondary btn-sm" v-on:click="addExpenseCategory">
         Lisa
     </button>
 </div>

@@ -6,7 +6,7 @@
     <input type="text" style="margin: 5px" placeholder="kasutajanimi" v-model="userRequest.username"><br>
     <input type="text" style="margin: 5px" placeholder="parool" v-model="userRequest.password"><br>
     <input type="text" style="margin: 5px" placeholder="email" v-model="userRequest.email"><br>
-    <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="registerNewUser">Loo kasutaja</button>
+    <button type="button" style="margin: 5px" class="btn btn-secondary" v-on:click="registerNewUser">Loo kasutaja</button>
     <br>
 
 
