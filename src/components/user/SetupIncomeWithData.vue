@@ -31,7 +31,6 @@
 
           <div class="row" v-for="subcategory in category.subcategories">
             <p class="text-center">{{ subcategory.subcategoryName }}</p>
-
           </div>
         </div>
 
@@ -49,6 +48,7 @@
           <div class="row">
             <p class="text-center">{{ category.categorySum }}</p>
           </div>
+
           <div class="row" v-for="subcategory in category.subcategories">
             <p class="text-center">{{ subcategory.subcategorySum }}</p>
           </div>
@@ -101,7 +101,8 @@
 
     </div>
 
-    <button type="button" style="margin: 5px" class="btn btn-outline-dark btn-sm" v-on:click="updatePlanningInfosInDatabase">
+    <button type="button" style="margin: 5px" class="btn btn-outline-dark btn-sm"
+            v-on:click="updatePlanningInfosInDatabase">
       Salvesta tulud
     </button>
 
@@ -139,6 +140,7 @@ export default {
                 categoryId: 0,
                 subcategoryId: 0,
                 subcategoryName: '',
+                subcategoryBudgetedSum: 0,
                 subcategoryBudgetedSumId: 0,
                 subcategorySum: 0,
                 isActive: false
@@ -178,11 +180,11 @@ export default {
       var planningInfoList = [];
       for (let c = 0; c < this.incomeBudgetInfo.categories.length; c++) {
         for (let sc = 0; sc < this.incomeBudgetInfo.categories[c].subcategories.length; sc++) {
-            let planningInfo = {
+          let planningInfo = {
 
-              amount: this.incomeBudgetInfo.categories[c].subcategories[sc].subcategoryBudgetedSum,
-              subcategoryBudgetedId: this.incomeBudgetInfo.categories[c].subcategories[sc].subcategoryBudgetedSumId
-            }
+            amount: this.incomeBudgetInfo.categories[c].subcategories[sc].subcategoryBudgetedSum,
+            subcategoryBudgetedId: this.incomeBudgetInfo.categories[c].subcategories[sc].subcategoryBudgetedSumId
+          }
           planningInfoList.push(planningInfo)
         }
       }
