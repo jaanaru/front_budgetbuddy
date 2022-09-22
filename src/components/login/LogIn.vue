@@ -54,7 +54,7 @@ export default {
                 ).then(response => {
                     this.userInfo = response.data
                     sessionStorage.setItem('userId', this.userInfo.userId)
-                    this.$router.push({name: 'myMonthlyBudget'})
+                    this.$router.push({name: 'myMonthlyBudgetRoute'})
 
 
                 }).catch(error => {

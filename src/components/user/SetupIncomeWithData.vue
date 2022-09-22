@@ -38,7 +38,7 @@
         <div class="col-sm">
           <div class="row">
             <p class="text-center">{{ category.categoryBudgetedSum }}</p>
-            </div>
+          </div>
 
           <div class="row" v-for="subcategory in category.subcategories">
             <input input class="form-control form-control-sm" v-model="subcategory.subcategoryBudgetedSum">
@@ -48,7 +48,7 @@
         <div class="col-sm">
           <div class="row">
             <p class="text-center">{{ category.categorySum }}</p>
-            </div>
+          </div>
           <div class="row" v-for="subcategory in category.subcategories">
             <p class="text-center">{{ subcategory.subcategorySum }}</p>
           </div>
@@ -101,6 +101,10 @@
 
     </div>
 
+    <button type="button" style="margin: 5px" class="btn btn-outline-dark btn-sm" v-on:click="updatePlanningInfosInDatabase">
+      Salvesta tulud
+    </button>
+
 
   </div>
 
@@ -115,8 +119,7 @@ export default {
   components: {AddSubcategory, AddIncomeCategory},
   props: {
     title: String,
-      month: '',
-      year: ''
+    budgetDateRange: {}
   },
 
   data() {
@@ -136,7 +139,7 @@ export default {
                 categoryId: 0,
                 subcategoryId: 0,
                 subcategoryName: '',
-                subcategoryBudgetedSum: 0,
+                subcategoryBudgetedSumId: 0,
                 subcategorySum: 0,
                 isActive: false
               }
@@ -145,9 +148,13 @@ export default {
         ],
         totalBudgetedSum: 0,
         totalSum: 0
-      }
-      ,
-
+      },
+      planningInfos: [
+        {
+          subcategoryBudgetedId: 0,
+          amount: 0
+        }
+      ]
     }
 
   },
@@ -155,8 +162,8 @@ export default {
     findIncomeBudgetInfo: function () {
       this.$http.get("/report/budget/income", {
             params: {
-              year: 2022,
-              month: 8,
+              year: this.budgetDateRange.year,
+              month: this.budgetDateRange.month,
               userId: this.userId
             }
           }
@@ -167,10 +174,30 @@ export default {
         console.log(error)
       })
     },
+    updatePlanningInfosInDatabase: function () {
+      var planningInfoList = [];
+      for (let c = 0; c < this.incomeBudgetInfo.categories.length; c++) {
+        for (let sc = 0; sc < this.incomeBudgetInfo.categories[c].subcategories.length; sc++) {
+            let planningInfo = {
 
+              amount: this.incomeBudgetInfo.categories[c].subcategories[sc].subcategoryBudgetedSum,
+              subcategoryBudgetedId: this.incomeBudgetInfo.categories[c].subcategories[sc].subcategoryBudgetedSumId
+            }
+          planningInfoList.push(planningInfo)
+        }
+      }
+
+
+      this.$http.patch("/budget/planning/month/update", planningInfoList
+      ).then(response => {
+        this.findIncomeBudgetInfo()
+      }).catch(error => {
+        console.log(error)
+      })
+    }
   },
 
-  mounted() {
+  beforeMount() {
     this.findIncomeBudgetInfo()
   }
 }

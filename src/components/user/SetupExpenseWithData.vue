@@ -112,8 +112,7 @@ export default {
   components: {AddSubcategory, AddExpenseCategory},
   props: {
     title: String,
-      month: '',
-      year: ''
+    budgetDateRange: {}
   },
 
   data() {
@@ -136,6 +135,7 @@ export default {
                 subcategoryId: 0,
                 subcategoryName: '',
                 subcategoryBudgetedSum: 0,
+                subcategoryBudgetedSumId: 0,
                 subcategorySum: 0,
                 isActive: false
               }
@@ -154,8 +154,8 @@ export default {
       this.divUpdateSubcategoryName = false
       this.$http.get("/report/budget/expense", {
             params: {
-              year: 2022,
-              month: 8,
+              year: this.budgetDateRange.year,
+              month: this.budgetDateRange.month,
               userId: this.userId
             }
           }
