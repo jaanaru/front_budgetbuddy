@@ -119,7 +119,11 @@ export default {
       this.transactionInfoAdd.amount = this.amount
       this.transactionInfoAdd.type = this.type
 
-      this.$http.post("/budget/transaction/add", this.transactionInfoAdd
+      this.$http.post("/budget/transaction/add", {
+        params :{
+          userId: this.userId
+        }
+          }
       ).then(response => {
         this.transactionInfoAdd= response.data
       }).catch(error => {
