@@ -1,8 +1,9 @@
 <template>
 
 
-    <div id="accountView">
-        <table class="table-hover" id="table">
+    <div>
+        <div id="accountView">
+        <table class="table-hover" id="table" >
             <thead>
             <tr>
                 <th scope="col">Minu kontod</th>
@@ -34,7 +35,7 @@
             </tbody>
 
         </table>
-
+        </div>
         <br>
         <div v-if="divUpdateAccountName">
             <input type="text" v-model="newAccountName" placeholder='Uus nimi'>
@@ -166,5 +167,9 @@ export default {
 </script>
 
 <style scoped>
-
+#accountView {
+    padding-left: 600px;
+    padding-bottom: 20px;
+    padding-top: 35px;
+}
 </style>

@@ -115,6 +115,8 @@ export default {
   components: {AddSubcategory, AddIncomeCategory},
   props: {
     title: String,
+      month: '',
+      year: ''
   },
 
   data() {
