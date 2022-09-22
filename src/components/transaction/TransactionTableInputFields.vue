@@ -27,9 +27,7 @@
 <script>
 export default {
   name: 'TransactionTableInputFields',
-  props: {
-    userId:''
-  },
+  props: {},
   data: function () {
     return {
       userId: sessionStorage.getItem('userId'),
