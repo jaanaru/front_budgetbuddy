@@ -50,7 +50,7 @@
 
     </div>
     <br><br>
-      <button type="button" style="margin: 5px" class="btn btn-dark" v-on:click="saveBudget">Salvesta eelarve</button>
+      <button type="button" style="margin: 5px" class="btn btn-secondary" v-on:click="saveBudget">Salvesta eelarve</button>
   </div>
 </template>
 
@@ -89,5 +89,11 @@ export default {
 #select {
     width: 10%;
     height: 42px;
+}
+#month {
+    padding-left: 40px;
+}
+#year {
+    padding-left: 40px;
 }
 </style>

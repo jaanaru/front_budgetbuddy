@@ -21,12 +21,12 @@
                 <td></td>
                 <td>{{ account.balance }}</td>
                 <td>
-                    <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="editAccountName(account)">
+                    <button type="submit" class="btn btn-outline-secondary btn-sm" v-on:click="editAccountName(account)">
                         Muuda
                     </button>
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-outline-dark btn-sm"
+                    <button type="submit" class="btn btn-outline-secondary btn-sm"
                             v-on:click="deactivateAccountName(account)">Kustuta
                     </button>
                 </td>
@@ -39,13 +39,13 @@
         <br>
         <div v-if="divUpdateAccountName">
             <input type="text" v-model="newAccountName" placeholder='Uus nimi'>
-            <button type="submit" class="btn btn-outline-dark btn-sm" v-on:click="updateAccountName">Salvesta
+            <button type="submit" class="btn btn-outline-secondary btn-sm" v-on:click="updateAccountName">Salvesta
             </button>
         </div>
         <br>
 
 <div v-if="divAddNewAccount">
-    <button type="submit" class="btn btn-outline-dark btn-sm"
+    <button type="submit" class="btn btn-outline-secondary btn-sm"
             v-on:click="addNewAccount">Lisa uus konto
     </button>
     <br>

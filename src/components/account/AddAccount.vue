@@ -22,7 +22,7 @@
         </form>
 
 
-        <button type="button" style="margin: 5px" class="btn btn-outline-dark btn-sm" v-on:click="addAccount">
+        <button type="button" style="margin: 5px" class="btn btn-secondary btn-sm" v-on:click="addAccount">
             Salvesta
         </button>
 
