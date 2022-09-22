@@ -16,11 +16,11 @@
           </option>
     </select>
     </td>
-    <td><input type="text" class="form-control" placeholder="Memo"></td>
+    <td><input type="text" class="form-control" placeholder="Memo" v-model="transactionInfoAdd.description"></td>
     <td><input type="number" placeholder="Väljaminek"/></td>
     <td><input type="number" placeholder="Sissetulek"/></td>
     <td>
-      <button type="submit" style="margin: 5px" class="btn btn-light" v-on:click="transactionInfoAdd">Lisa</button>
+      <button type="submit" style="margin: 5px" class="btn btn-light" v-on:click="transactionInfoAddTransaction(accountInfo, subcategoryInfoAdd)">Lisa</button>
     </td>
   </tr>
 </template>
@@ -100,7 +100,7 @@ export default {
         console.log(error)
       })
     },
-    transactionInfoAdd: function () {
+    transactionInfoAddTransaction: function () {
       // todo Loo data osasse uus objekt add transactionInfo
       //  täida see transactionInfo objekt infoga
       //  osa infost saad täidetud v-model abil kastidest ja rippmenüüde selected id-dest
@@ -117,13 +117,10 @@ export default {
       this.transactionInfoAdd.amount = this.amount
       this.transactionInfoAdd.type = this.type
 
-      this.$http.post("/budget/transaction/add", {
-        params :{
-          userId: this.userId
-        }
-          }
+      this.$http.post("/budget/transaction/add", this.transactionInfoAdd
       ).then(response => {
-        this.transactionInfoAdd= response.data
+        this.transactionInfoAdd = response.data
+
       }).catch(error => {
         console.log(error)
       })
