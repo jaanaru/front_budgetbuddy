@@ -100,7 +100,7 @@
 
 
     </div>
-
+    <AlertSuccess :success-message="successMessage"/>
     <button type="button" style="margin: 5px" class="btn btn-dark"
             v-on:click="updatePlanningInfosInDatabase">
       Salvesta tulud
@@ -114,10 +114,12 @@
 <script>
 import AddSubcategory from "@/components/user/AddSubcategory";
 import AddIncomeCategory from "@/components/user/AddIncomeCategory";
+import AlertSuccess from "@/components/alerts/AlertSuccess";
+
 
 export default {
   name: "SetupIncomeWithData",
-  components: {AddSubcategory, AddIncomeCategory},
+  components: {AddSubcategory, AddIncomeCategory, AlertSuccess},
   props: {
     title: String,
     budgetDateRange: {}
@@ -126,6 +128,7 @@ export default {
   data() {
     return {
       userId: sessionStorage.getItem('userId'),
+      successMessage: '',
       newSubcategoryName: '',
       subcategoryId: 0,
       incomeBudgetInfo: {
@@ -185,6 +188,7 @@ export default {
             amount: this.incomeBudgetInfo.categories[c].subcategories[sc].subcategoryBudgetedSum,
             subcategoryBudgetedId: this.incomeBudgetInfo.categories[c].subcategories[sc].subcategoryBudgetedSumId
           }
+          this.successMessage = 'Eelarve tulud salvestatud :)'
           planningInfoList.push(planningInfo)
         }
       }

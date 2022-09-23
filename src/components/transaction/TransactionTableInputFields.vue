@@ -30,11 +30,11 @@
     </td>
     <td><input type="text" class="form-control" placeholder="Memo" v-model="transactionInfoAdd.description"></td>
 
-    <select type="selected" v-model="transactionInfoAdd.type">
+    <td><select type="selected" v-model="transactionInfoAdd.type">
       <option value="e">Kulu</option>
       <option value="i">Tulu</option>
+        </select></td>
 
-    </select>
     <td><input type="number" placeholder="Summa" v-model="transactionInfoAdd.amount"/></td>
     <td>
       <button type="submit" style="margin: 5px" class="btn btn-light" v-on:click="transactionInfoAddTransaction">Lisa</button>

@@ -3,6 +3,7 @@
 
   <div id="expense">
 
+
     <div class="container">
       <div class="row">
         <div class="col-sm">
@@ -101,7 +102,7 @@
 
 
     </div>
-
+    <AlertSuccess :success-message="successMessage"/>
     <button type="button" style="margin: 5px" class="btn btn-dark"
             v-on:click="updatePlanningInfosInDatabase">
       Salvesta kulud
@@ -114,10 +115,11 @@
 <script>
 import AddSubcategory from "@/components/user/AddSubcategory";
 import AddExpenseCategory from "@/components/user/AddExpenseCategory";
+import AlertSuccess from "@/components/alerts/AlertSuccess";
 
 export default {
   name: "SetupExpenseWithData",
-  components: {AddSubcategory, AddExpenseCategory},
+  components: {AddSubcategory, AddExpenseCategory, AlertSuccess  },
   props: {
     title: String,
     budgetDateRange: {}
@@ -126,6 +128,7 @@ export default {
   data() {
     return {
       userId: sessionStorage.getItem('userId'),
+      successMessage: '',
       newSubcategoryName: '',
       subcategoryId: 0,
       expenseBudgetInfo: {
@@ -178,20 +181,21 @@ export default {
     },
     updatePlanningInfosInDatabase: function () {
       var planningInfoList = [];
-      for (let c = 0; c < this.incomeBudgetInfo.categories.length; c++) {
-        for (let sc = 0; sc < this.incomeBudgetInfo.categories[c].subcategories.length; sc++) {
+      for (let c = 0; c < this.expenseBudgetInfo.categories.length; c++) {
+        for (let sc = 0; sc < this.expenseBudgetInfo.categories[c].subcategories.length; sc++) {
           let planningInfo = {
 
-            amount: this.incomeBudgetInfo.categories[c].subcategories[sc].subcategoryBudgetedSum,
-            subcategoryBudgetedId: this.incomeBudgetInfo.categories[c].subcategories[sc].subcategoryBudgetedSumId
+            amount: this.expenseBudgetInfo.categories[c].subcategories[sc].subcategoryBudgetedSum,
+            subcategoryBudgetedId: this.expenseBudgetInfo.categories[c].subcategories[sc].subcategoryBudgetedSumId
           }
+          this.successMessage = 'Eelarve kulud salvestatud :)'
           planningInfoList.push(planningInfo)
         }
       }
 
       this.$http.patch("/budget/planning/month/update", planningInfoList
       ).then(response => {
-        this.findIncomeBudgetInfo()
+        this.findExpenseBudgetInfo()
       }).catch(error => {
         console.log(error)
       })
